@@ -2,193 +2,34 @@ name: Build BLOOM Browser
 
 on:
   push:
-    branches: [main]
+    branches: [main, claude/search-engine-frontend-A6FXd]
     tags: ["v*"]
   pull_request:
     branches: [main]
   workflow_dispatch:
 
 jobs:
-  # ---------------------------------------------------------------------------
-  # Job 1: Desktop builds (Linux, macOS ARM, macOS Intel, Windows)
-  # ---------------------------------------------------------------------------
-  build-desktop:
-    strategy:
-      fail-fast: false
-      matrix:
-        include:
-          - os: ubuntu-latest
-            target: linux-x64
-            artifact-name: bloom-linux-x64
-          - os: macos-latest
-            target: macos-arm64
-            artifact-name: bloom-macos-arm64
-          - os: macos-13
-            target: macos-x64
-            artifact-name: bloom-macos-x64
-          - os: windows-latest
-            target: windows-x64
-            artifact-name: bloom-windows-x64
+  linux:
+    uses: ./.github/workflows/build-linux.yml
 
-    runs-on: ${{ matrix.os }}
+  macos:
+    uses: ./.github/workflows/build-macos.yml
 
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
+  windows:
+    uses: ./.github/workflows/build-windows.yml
 
-      - name: Install Rust stable toolchain
-        uses: dtolnay/rust-toolchain@stable
+  android:
+    uses: ./.github/workflows/build-android.yml
 
-      - name: Rust cache
-        uses: Swatinem/rust-cache@v2
-        with:
-          workspaces: src-tauri
-
-      - name: Install system dependencies (Linux)
-        if: matrix.os == 'ubuntu-latest'
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y \
-            libwebkit2gtk-4.1-dev \
-            libappindicator3-dev \
-            librsvg2-dev \
-            patchelf \
-            libssl-dev \
-            libgtk-3-dev \
-            libsoup-3.0-dev \
-            libjavascriptcoregtk-4.1-dev
-
-      - name: Install Tauri CLI
-        run: cargo install tauri-cli --version "^2" --locked
-
-      - name: Build browser
-        run: cargo tauri build
-        env:
-          TAURI_SIGNING_PRIVATE_KEY: ""
-
-      - name: Upload artifacts (Linux)
-        if: matrix.target == 'linux-x64'
-        uses: actions/upload-artifact@v4
-        with:
-          name: ${{ matrix.artifact-name }}
-          path: |
-            src-tauri/target/release/bundle/deb/*.deb
-            src-tauri/target/release/bundle/appimage/*.AppImage
-          if-no-files-found: warn
-
-      - name: Upload artifacts (macOS)
-        if: startsWith(matrix.target, 'macos')
-        uses: actions/upload-artifact@v4
-        with:
-          name: ${{ matrix.artifact-name }}
-          path: |
-            src-tauri/target/release/bundle/dmg/*.dmg
-          if-no-files-found: warn
-
-      - name: Upload artifacts (Windows)
-        if: matrix.target == 'windows-x64'
-        uses: actions/upload-artifact@v4
-        with:
-          name: ${{ matrix.artifact-name }}
-          path: |
-            src-tauri/target/release/bundle/msi/*.msi
-            src-tauri/target/release/bundle/nsis/*.exe
-          if-no-files-found: warn
+  ios:
+    uses: ./.github/workflows/build-ios.yml
 
   # ---------------------------------------------------------------------------
-  # Job 2: Android build
-  # ---------------------------------------------------------------------------
-  build-android:
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Install Rust stable toolchain
-        uses: dtolnay/rust-toolchain@stable
-        with:
-          targets: aarch64-linux-android,armv7-linux-androideabi,x86_64-linux-android,i686-linux-android
-
-      - name: Set up JDK 17
-        uses: actions/setup-java@v4
-        with:
-          distribution: temurin
-          java-version: "17"
-
-      - name: Set up Android SDK
-        uses: android-actions/setup-android@v3
-
-      - name: Install Android NDK r26d
-        run: |
-          sdkmanager --install "ndk;26.3.11579264"
-          echo "NDK_HOME=$ANDROID_HOME/ndk/26.3.11579264" >> "$GITHUB_ENV"
-
-      - name: Rust cache
-        uses: Swatinem/rust-cache@v2
-        with:
-          workspaces: src-tauri
-
-      - name: Install Tauri CLI
-        run: cargo install tauri-cli --version "^2" --locked
-
-      - name: Build Android
-        run: cargo tauri android build
-        env:
-          NDK_HOME: ${{ env.NDK_HOME }}
-          TAURI_SIGNING_PRIVATE_KEY: ""
-
-      - name: Upload APK artifacts
-        uses: actions/upload-artifact@v4
-        with:
-          name: bloom-android
-          path: |
-            src-tauri/gen/android/app/build/outputs/apk/**/*.apk
-          if-no-files-found: warn
-
-  # ---------------------------------------------------------------------------
-  # Job 3: iOS build (unsigned, CI only)
-  # ---------------------------------------------------------------------------
-  build-ios:
-    runs-on: macos-latest
-    continue-on-error: true
-
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Install Rust stable toolchain
-        uses: dtolnay/rust-toolchain@stable
-        with:
-          targets: aarch64-apple-ios
-
-      - name: Rust cache
-        uses: Swatinem/rust-cache@v2
-        with:
-          workspaces: src-tauri
-
-      - name: Install Tauri CLI
-        run: cargo install tauri-cli --version "^2" --locked
-
-      - name: Build iOS (unsigned)
-        run: cargo tauri ios build
-        env:
-          TAURI_SIGNING_PRIVATE_KEY: ""
-
-      - name: Upload IPA artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: bloom-ios
-          path: |
-            src-tauri/gen/apple/build/**/*.ipa
-          if-no-files-found: warn
-
-  # ---------------------------------------------------------------------------
-  # Job 4: Create GitHub release (tags only)
+  # Create GitHub release (tags only)
   # ---------------------------------------------------------------------------
   create-release:
     if: startsWith(github.ref, 'refs/tags/v')
-    needs: [build-desktop, build-android, build-ios]
+    needs: [linux, macos, windows, android, ios]
     runs-on: ubuntu-latest
     permissions:
       contents: write
@@ -199,7 +40,7 @@ jobs:
         with:
           path: artifacts
 
-      - name: Display downloaded artifacts
+      - name: List artifacts
         run: find artifacts -type f | head -50
 
       - name: Create GitHub Release
@@ -211,6 +52,7 @@ jobs:
           files: |
             artifacts/**/*.deb
             artifacts/**/*.AppImage
+            artifacts/**/*.rpm
             artifacts/**/*.dmg
             artifacts/**/*.msi
             artifacts/**/*.exe

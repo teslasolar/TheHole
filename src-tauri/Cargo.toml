@@ -4,6 +4,10 @@ version = "0.1.0"
 edition = "2021"
 description = "THE HOLE BROWSER - codename BLOOM"
 
+[lib]
+name = "the_hole_browser"
+crate-type = ["staticlib", "cdylib", "lib"]
+
 [build-dependencies]
 tauri-build = { version = "2", features = [] }
 
