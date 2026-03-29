@@ -100,10 +100,6 @@ pub fn parse_input(input: &str) -> RouterAction {
 pub fn build_shortcut_url(source: &str, query: &str) -> Option<String> {
     for &(_prefix, src_name, base_url) in SOURCE_SHORTCUTS {
         if src_name == source {
-            let encoded = url::form_urlencoded::Serializer::new(String::new())
-                .append_pair("q", query)
-                .finish();
-            // The base URLs already have ?q= or ?query= so we just append the raw query.
             let encoded_query: String =
                 url::form_urlencoded::byte_serialize(query.as_bytes()).collect();
             return Some(format!("{}{}", base_url, encoded_query));

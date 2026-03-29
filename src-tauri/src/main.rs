@@ -9,6 +9,8 @@ mod router;
 mod slop_shield;
 mod storage;
 
+use tauri::Manager;
+
 use blocklists::BlockList;
 use slop_shield::SlopShield;
 use storage::Database;
