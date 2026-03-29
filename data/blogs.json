@@ -1,0 +1,488 @@
+[
+  {
+    "id": "jvns",
+    "author": "Julia Evans",
+    "url": "https://jvns.ca",
+    "rss": "https://jvns.ca/atom.xml",
+    "tier": 1,
+    "tags": ["linux", "networking", "debugging", "zines"],
+    "lang": "en"
+  },
+  {
+    "id": "danluu",
+    "author": "Dan Luu",
+    "url": "https://danluu.com",
+    "rss": "https://danluu.com/atom.xml",
+    "tier": 1,
+    "tags": ["performance", "systems", "engineering"],
+    "lang": "en"
+  },
+  {
+    "id": "rachelbythebay",
+    "author": "Rachel Kroll",
+    "url": "https://rachelbythebay.com",
+    "rss": "https://rachelbythebay.com/w/atom.xml",
+    "tier": 1,
+    "tags": ["systems", "reliability", "debugging"],
+    "lang": "en"
+  },
+  {
+    "id": "drewdevault",
+    "author": "Drew DeVault",
+    "url": "https://drewdevault.com",
+    "rss": "https://drewdevault.com/blog/index.xml",
+    "tier": 1,
+    "tags": ["open-source", "linux", "systems"],
+    "lang": "en"
+  },
+  {
+    "id": "xeiaso",
+    "author": "Xe Iaso",
+    "url": "https://xeiaso.net",
+    "rss": "https://xeiaso.net/blog.rss",
+    "tier": 1,
+    "tags": ["nix", "go", "rust", "infrastructure"],
+    "lang": "en"
+  },
+  {
+    "id": "fabiensanglard",
+    "author": "Fabien Sanglard",
+    "url": "https://fabiensanglard.net",
+    "rss": "https://fabiensanglard.net/rss.xml",
+    "tier": 1,
+    "tags": ["graphics", "game-engines", "low-level"],
+    "lang": "en"
+  },
+  {
+    "id": "bartoszmilewski",
+    "author": "Bartosz Milewski",
+    "url": "https://bartoszmilewski.com",
+    "rss": "https://bartoszmilewski.com/feed/",
+    "tier": 1,
+    "tags": ["category-theory", "haskell", "functional-programming"],
+    "lang": "en"
+  },
+  {
+    "id": "hillelwayne",
+    "author": "Hillel Wayne",
+    "url": "https://hillelwayne.com",
+    "rss": "https://www.hillelwayne.com/index.xml",
+    "tier": 1,
+    "tags": ["formal-methods", "tla+", "software-engineering"],
+    "lang": "en"
+  },
+  {
+    "id": "eli-thegreenplace",
+    "author": "Eli Bendersky",
+    "url": "https://eli.thegreenplace.net",
+    "rss": "https://eli.thegreenplace.net/feeds/all.atom.xml",
+    "tier": 1,
+    "tags": ["compilers", "go", "python", "low-level"],
+    "lang": "en"
+  },
+  {
+    "id": "scattered-thoughts",
+    "author": "Jamie Brandon",
+    "url": "https://scattered-thoughts.net",
+    "rss": "https://scattered-thoughts.net/atom.xml",
+    "tier": 1,
+    "tags": ["databases", "programming-languages", "systems"],
+    "lang": "en"
+  },
+  {
+    "id": "tonsky",
+    "author": "Nikita Prokopov",
+    "url": "https://tonsky.me",
+    "rss": "https://tonsky.me/blog/atom.xml",
+    "tier": 1,
+    "tags": ["clojure", "ui", "fonts", "design"],
+    "lang": "en"
+  },
+  {
+    "id": "simonwillison",
+    "author": "Simon Willison",
+    "url": "https://simonwillison.net",
+    "rss": "https://simonwillison.net/atom/everything/",
+    "tier": 1,
+    "tags": ["python", "django", "llm", "data"],
+    "lang": "en"
+  },
+  {
+    "id": "colintheblogger",
+    "author": "Colin Percival",
+    "url": "https://www.daemonology.net/blog/",
+    "rss": "https://www.daemonology.net/blog/index.rss",
+    "tier": 1,
+    "tags": ["security", "freebsd", "cryptography"],
+    "lang": "en"
+  },
+  {
+    "id": "apenwarr",
+    "author": "Avery Pennarun",
+    "url": "https://apenwarr.ca/log/",
+    "rss": "https://apenwarr.ca/log/rss.php",
+    "tier": 1,
+    "tags": ["systems", "networking", "engineering-management"],
+    "lang": "en"
+  },
+  {
+    "id": "nullprogram",
+    "author": "Chris Wellons",
+    "url": "https://nullprogram.com",
+    "rss": "https://nullprogram.com/feed/",
+    "tier": 1,
+    "tags": ["c", "emacs", "systems", "low-level"],
+    "lang": "en"
+  },
+  {
+    "id": "blog-burntsushi",
+    "author": "Andrew Gallant",
+    "url": "https://blog.burntsushi.net",
+    "rss": "https://blog.burntsushi.net/index.xml",
+    "tier": 1,
+    "tags": ["rust", "regex", "cli-tools"],
+    "lang": "en"
+  },
+  {
+    "id": "fasterthanli",
+    "author": "Amos Wenger",
+    "url": "https://fasterthanli.me",
+    "rss": "https://fasterthanli.me/index.xml",
+    "tier": 1,
+    "tags": ["rust", "linux", "networking", "systems"],
+    "lang": "en"
+  },
+  {
+    "id": "matklad",
+    "author": "Alex Kladov",
+    "url": "https://matklad.github.io",
+    "rss": "https://matklad.github.io/feed.xml",
+    "tier": 1,
+    "tags": ["rust", "ide", "compilers"],
+    "lang": "en"
+  },
+  {
+    "id": "wingolog",
+    "author": "Andy Wingo",
+    "url": "https://wingolog.org",
+    "rss": "https://wingolog.org/feed/atom",
+    "tier": 1,
+    "tags": ["compilers", "guile", "scheme", "wasm"],
+    "lang": "en"
+  },
+  {
+    "id": "journal-stuffwithstuff",
+    "author": "Bob Nystrom",
+    "url": "https://journal.stuffwithstuff.com",
+    "rss": "https://journal.stuffwithstuff.com/atom.xml",
+    "tier": 1,
+    "tags": ["programming-languages", "game-dev", "dart"],
+    "lang": "en"
+  },
+  {
+    "id": "benhoyt",
+    "author": "Ben Hoyt",
+    "url": "https://benhoyt.com",
+    "rss": "https://benhoyt.com/writings/rss.xml",
+    "tier": 2,
+    "tags": ["go", "python", "performance"],
+    "lang": "en"
+  },
+  {
+    "id": "brooker",
+    "author": "Marc Brooker",
+    "url": "https://brooker.co.za/blog/",
+    "rss": "https://brooker.co.za/blog/rss.xml",
+    "tier": 1,
+    "tags": ["distributed-systems", "aws", "reliability"],
+    "lang": "en"
+  },
+  {
+    "id": "without-boats",
+    "author": "Without Boats",
+    "url": "https://without.boats",
+    "rss": "https://without.boats/index.xml",
+    "tier": 1,
+    "tags": ["rust", "async", "programming-languages"],
+    "lang": "en"
+  },
+  {
+    "id": "preshing",
+    "author": "Jeff Preshing",
+    "url": "https://preshing.com",
+    "rss": "https://preshing.com/feed",
+    "tier": 1,
+    "tags": ["concurrency", "c++", "lock-free"],
+    "lang": "en"
+  },
+  {
+    "id": "flak",
+    "author": "Ted Unangst",
+    "url": "https://flak.tedunangst.com",
+    "rss": "https://flak.tedunangst.com/rss",
+    "tier": 1,
+    "tags": ["openbsd", "security", "systems"],
+    "lang": "en"
+  },
+  {
+    "id": "brandur",
+    "author": "Brandur Leach",
+    "url": "https://brandur.org",
+    "rss": "https://brandur.org/articles.atom",
+    "tier": 1,
+    "tags": ["postgres", "apis", "go", "engineering"],
+    "lang": "en"
+  },
+  {
+    "id": "cliffle",
+    "author": "Cliff Biffle",
+    "url": "https://cliffle.com",
+    "rss": "https://cliffle.com/rss.xml",
+    "tier": 1,
+    "tags": ["embedded", "rust", "hardware"],
+    "lang": "en"
+  },
+  {
+    "id": "nelhage",
+    "author": "Nelson Elhage",
+    "url": "https://blog.nelhage.com",
+    "rss": "https://blog.nelhage.com/atom.xml",
+    "tier": 1,
+    "tags": ["systems", "debugging", "performance"],
+    "lang": "en"
+  },
+  {
+    "id": "jamesgolick",
+    "author": "Will Larson",
+    "url": "https://lethain.com",
+    "rss": "https://lethain.com/feeds/",
+    "tier": 1,
+    "tags": ["engineering-management", "systems", "strategy"],
+    "lang": "en"
+  },
+  {
+    "id": "b0rk",
+    "author": "b0rk",
+    "url": "https://wizardzines.com",
+    "rss": "https://wizardzines.com/index.xml",
+    "tier": 2,
+    "tags": ["zines", "linux", "networking"],
+    "lang": "en"
+  },
+  {
+    "id": "lcamtuf",
+    "author": "Michal Zalewski",
+    "url": "https://lcamtuf.substack.com",
+    "rss": "https://lcamtuf.substack.com/feed",
+    "tier": 1,
+    "tags": ["security", "fuzzing", "hardware"],
+    "lang": "en"
+  },
+  {
+    "id": "antirez",
+    "author": "Salvatore Sanfilippo",
+    "url": "http://antirez.com",
+    "rss": "http://antirez.com/rss",
+    "tier": 1,
+    "tags": ["redis", "systems", "c"],
+    "lang": "en"
+  },
+  {
+    "id": "lemire",
+    "author": "Daniel Lemire",
+    "url": "https://lemire.me/blog/",
+    "rss": "https://lemire.me/blog/feed/",
+    "tier": 1,
+    "tags": ["performance", "simd", "databases"],
+    "lang": "en"
+  },
+  {
+    "id": "thenewstack",
+    "author": "The New Stack",
+    "url": "https://thenewstack.io",
+    "rss": "https://thenewstack.io/feed/",
+    "tier": 2,
+    "tags": ["cloud-native", "kubernetes", "devops"],
+    "lang": "en"
+  },
+  {
+    "id": "increment",
+    "author": "Increment (Stripe)",
+    "url": "https://increment.com",
+    "rss": "https://increment.com/feed.xml",
+    "tier": 1,
+    "tags": ["engineering", "software-engineering"],
+    "lang": "en"
+  },
+  {
+    "id": "joelonsoftware",
+    "author": "Joel Spolsky",
+    "url": "https://www.joelonsoftware.com",
+    "rss": "https://www.joelonsoftware.com/feed/",
+    "tier": 1,
+    "tags": ["software-engineering", "management", "startups"],
+    "lang": "en"
+  },
+  {
+    "id": "steveklabnik",
+    "author": "Steve Klabnik",
+    "url": "https://steveklabnik.com",
+    "rss": "https://steveklabnik.com/feed.xml",
+    "tier": 1,
+    "tags": ["rust", "open-source", "programming"],
+    "lang": "en"
+  },
+  {
+    "id": "paul-graham",
+    "author": "Paul Graham",
+    "url": "https://paulgraham.com",
+    "rss": "https://paulgraham.com/rss.html",
+    "tier": 1,
+    "tags": ["startups", "essays", "lisp"],
+    "lang": "en"
+  },
+  {
+    "id": "stratechery",
+    "author": "Ben Thompson",
+    "url": "https://stratechery.com",
+    "rss": "https://stratechery.com/feed/",
+    "tier": 1,
+    "tags": ["tech-strategy", "business", "analysis"],
+    "lang": "en"
+  },
+  {
+    "id": "cloudflare-blog",
+    "author": "Cloudflare",
+    "url": "https://blog.cloudflare.com",
+    "rss": "https://blog.cloudflare.com/rss/",
+    "tier": 1,
+    "tags": ["networking", "security", "performance", "infrastructure"],
+    "lang": "en"
+  },
+  {
+    "id": "netflix-techblog",
+    "author": "Netflix Technology Blog",
+    "url": "https://netflixtechblog.com",
+    "rss": "https://netflixtechblog.com/feed",
+    "tier": 1,
+    "tags": ["distributed-systems", "microservices", "streaming"],
+    "lang": "en"
+  },
+  {
+    "id": "uber-engineering",
+    "author": "Uber Engineering",
+    "url": "https://www.uber.com/blog/engineering/",
+    "rss": "https://www.uber.com/blog/engineering/rss/",
+    "tier": 2,
+    "tags": ["distributed-systems", "data", "infrastructure"],
+    "lang": "en"
+  },
+  {
+    "id": "discord-engineering",
+    "author": "Discord Engineering",
+    "url": "https://discord.com/blog",
+    "rss": "https://discord.com/blog/rss.xml",
+    "tier": 2,
+    "tags": ["scaling", "rust", "infrastructure"],
+    "lang": "en"
+  },
+  {
+    "id": "fly-io",
+    "author": "Fly.io",
+    "url": "https://fly.io/blog/",
+    "rss": "https://fly.io/blog/feed.xml",
+    "tier": 1,
+    "tags": ["infrastructure", "distributed-systems", "elixir"],
+    "lang": "en"
+  },
+  {
+    "id": "tailscale",
+    "author": "Tailscale",
+    "url": "https://tailscale.com/blog/",
+    "rss": "https://tailscale.com/blog/index.xml",
+    "tier": 1,
+    "tags": ["networking", "wireguard", "go"],
+    "lang": "en"
+  },
+  {
+    "id": "oxide-computer",
+    "author": "Oxide Computer",
+    "url": "https://oxide.computer/blog",
+    "rss": "https://oxide.computer/blog/feed",
+    "tier": 1,
+    "tags": ["hardware", "rust", "systems"],
+    "lang": "en"
+  },
+  {
+    "id": "twoscomplement",
+    "author": "Two's Complement",
+    "url": "https://www.twoscomplement.org",
+    "rss": "https://www.twoscomplement.org/feed.xml",
+    "tier": 2,
+    "tags": ["systems", "programming"],
+    "lang": "en"
+  },
+  {
+    "id": "philipotoole",
+    "author": "Philip O'Toole",
+    "url": "https://www.philipotoole.com",
+    "rss": "https://www.philipotoole.com/feed/",
+    "tier": 2,
+    "tags": ["databases", "distributed-systems", "go"],
+    "lang": "en"
+  },
+  {
+    "id": "igvita",
+    "author": "Ilya Grigorik",
+    "url": "https://www.igvita.com",
+    "rss": "https://www.igvita.com/feed/",
+    "tier": 1,
+    "tags": ["web-performance", "networking", "http"],
+    "lang": "en"
+  },
+  {
+    "id": "pganalyze",
+    "author": "pganalyze",
+    "url": "https://pganalyze.com/blog",
+    "rss": "https://pganalyze.com/blog.rss",
+    "tier": 2,
+    "tags": ["postgres", "databases", "performance"],
+    "lang": "en"
+  },
+  {
+    "id": "samwho",
+    "author": "Sam Rose",
+    "url": "https://samwho.dev",
+    "rss": "https://samwho.dev/rss.xml",
+    "tier": 2,
+    "tags": ["visualizations", "systems", "programming"],
+    "lang": "en"
+  },
+  {
+    "id": "blog-jim-nielsen",
+    "author": "Jim Nielsen",
+    "url": "https://blog.jim-nielsen.com",
+    "rss": "https://blog.jim-nielsen.com/feed.xml",
+    "tier": 2,
+    "tags": ["web", "design", "html", "css"],
+    "lang": "en"
+  },
+  {
+    "id": "joshwcomeau",
+    "author": "Josh W. Comeau",
+    "url": "https://www.joshwcomeau.com",
+    "rss": "https://www.joshwcomeau.com/rss.xml",
+    "tier": 2,
+    "tags": ["css", "react", "web", "frontend"],
+    "lang": "en"
+  },
+  {
+    "id": "daverupert",
+    "author": "Dave Rupert",
+    "url": "https://daverupert.com",
+    "rss": "https://daverupert.com/atom.xml",
+    "tier": 2,
+    "tags": ["web", "accessibility", "frontend"],
+    "lang": "en"
+  }
+]

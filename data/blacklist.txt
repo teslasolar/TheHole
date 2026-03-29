@@ -1,0 +1,76 @@
+# THE HOLE -- content farm / low-quality domain blacklist
+# One domain per line.  Lines starting with # are comments.
+
+# Classic content farms
+ehow.com
+wikihow.com
+about.com
+hubpages.com
+squidoo.com
+examiner.com
+suite101.com
+buzzle.com
+articlesbase.com
+articlesnatch.com
+ezinearticles.com
+goarticles.com
+sooperarticles.com
+ideamarketers.com
+submityourideahere.com
+
+# SEO spam / scraper sites
+w3schools.in
+tutorialspoint.online
+geeksforgeeks.cc
+code-mentor.org
+codespeedy.org
+codeforwin.org
+programtopia.net
+codesdope.com
+
+# AI-generated content mills
+writesonic.com
+jasper.ai/blog
+copy.ai/blog
+articleforge.com
+contentbot.ai
+writecream.com
+rytr.me/blog
+kafkai.com
+peppertype.ai
+closerscopy.com
+longshot.ai
+wordtune.com/blog
+hyperwriteai.com
+textcortex.com
+
+# Aggregator spam
+techgig.com
+dzone.com/links
+hackernoon.com/tagged
+dev.to/t/spam
+codeburst.io
+hackr.io/blog
+datafloq.com
+analyticsindiamag.com
+
+# Clickbait tech sites
+bgr.com
+digitaltrends.com/news
+komando.com
+makeuseof.com
+howtogeek.com/author/generic
+windowscentral.com
+laptopmag.com
+tomsguide.com/opinion
+slashgear.com
+androidauthority.com/opinion
+
+# Stack Overflow clones / mirrors
+qaru.site
+stackoverrun.com
+codegrepper.com
+tabnine.com/code
+programcreek.com
+code-examples.net
+codepedia.org

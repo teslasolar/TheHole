@@ -1,0 +1,96 @@
+{
+  "arxiv": {
+    "name": "arXiv",
+    "spider": "arxiv",
+    "tier": 1,
+    "api_url": "http://export.arxiv.org/api/query",
+    "rate_limit": 0.33,
+    "schedule": "0 */6 * * *",
+    "description": "Open-access preprint archive for CS, math, physics, and more",
+    "enabled": true
+  },
+  "github": {
+    "name": "GitHub",
+    "spider": "github",
+    "tier": 2,
+    "api_url": "https://api.github.com/search/repositories",
+    "rate_limit": 1.0,
+    "schedule": "0 */4 * * *",
+    "description": "Trending and recently-updated repositories",
+    "enabled": true,
+    "requires_token": true,
+    "env_var": "GITHUB_TOKEN"
+  },
+  "hackernews": {
+    "name": "Hacker News",
+    "spider": "hn",
+    "tier": 2,
+    "api_url": "https://hacker-news.firebaseio.com/v0",
+    "rate_limit": 2.0,
+    "schedule": "*/30 * * * *",
+    "description": "Top and best stories from Hacker News",
+    "enabled": true
+  },
+  "stackoverflow": {
+    "name": "Stack Overflow",
+    "spider": "stackoverflow",
+    "tier": 2,
+    "api_url": "https://api.stackexchange.com/2.3",
+    "rate_limit": 1.0,
+    "schedule": "0 */8 * * *",
+    "description": "Highly-voted answers on Stack Overflow",
+    "enabled": true,
+    "env_var": "SE_API_KEY"
+  },
+  "blogs": {
+    "name": "Practitioner Blogs",
+    "spider": "blogs",
+    "tier": 2,
+    "api_url": null,
+    "rate_limit": 2.0,
+    "schedule": "0 */3 * * *",
+    "description": "Curated list of practitioner and engineering blogs via RSS",
+    "enabled": true
+  },
+  "pubmed": {
+    "name": "PubMed",
+    "spider": "pubmed",
+    "tier": 1,
+    "api_url": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils",
+    "rate_limit": 3.0,
+    "schedule": "0 0 * * *",
+    "description": "Biomedical and life sciences literature",
+    "enabled": true,
+    "env_var": "NCBI_API_KEY"
+  },
+  "rfc": {
+    "name": "IETF RFCs",
+    "spider": "rfc",
+    "tier": 1,
+    "api_url": "https://www.rfc-editor.org/rfc-index.xml",
+    "rate_limit": 2.0,
+    "schedule": "0 0 * * 0",
+    "description": "Internet Engineering Task Force Request for Comments",
+    "enabled": true
+  },
+  "lobsters": {
+    "name": "Lobste.rs",
+    "spider": "lobsters",
+    "tier": 2,
+    "api_url": "https://lobste.rs",
+    "rate_limit": 1.0,
+    "schedule": "0 */2 * * *",
+    "description": "Technology-focused link aggregation",
+    "enabled": true
+  },
+  "fediverse": {
+    "name": "Fediverse",
+    "spider": "fediverse",
+    "tier": 3,
+    "api_url": null,
+    "rate_limit": 1.0,
+    "schedule": "0 */4 * * *",
+    "description": "Public posts from Mastodon-compatible instances",
+    "enabled": true
+  }
+}
