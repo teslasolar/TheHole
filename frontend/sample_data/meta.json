@@ -1,0 +1,22 @@
+{
+  "total_docs": 20,
+  "by_source": {
+    "arxiv": 4,
+    "github": 4,
+    "blogs": 7,
+    "so": 1,
+    "rfc": 1,
+    "pubmed": 1,
+    "lobsters": 1,
+    "hn": 0,
+    "fediverse": 0
+  },
+  "by_tier": {
+    "1": 10,
+    "2": 10,
+    "3": 0,
+    "4": 0
+  },
+  "built_at": "2025-03-29T00:00:00",
+  "version": "1.0-sample"
+}
