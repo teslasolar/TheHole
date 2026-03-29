@@ -132,15 +132,29 @@ a{color:#1a1a1a}
   <div class="downloads" id="downloads">
     <h2>Download BLOOM</h2>
 
+    <div id="no-release-banner" class="note" style="display:none;background:#fff8e1;border-left:3px solid #f9a825;padding:12px 16px;margin-bottom:20px;font-size:13px;color:#555;border-radius:0 4px 4px 0">
+      No release published yet. Downloads will work once the first release is tagged.
+      For now, <a href="#source">build from source</a> or grab CI artifacts from
+      <a href="https://github.com/teslasolar/TheHole/actions">GitHub Actions</a>.
+    </div>
+
+    <div class="platform" id="platform-detect" style="display:none;border:2px solid #1a1a1a">
+      <div class="platform-header">
+        <div><span class="platform-name" id="detect-name">Your platform</span> <span class="platform-arch" id="detect-arch"></span></div>
+        <div class="platform-meta">Detected automatically</div>
+      </div>
+      <div class="dl-links" id="detect-links"></div>
+    </div>
+
     <div class="platform">
       <div class="platform-header">
         <div><span class="platform-name">Linux</span> <span class="platform-arch">x86_64</span></div>
         <div class="platform-meta">WebKitGTK &middot; system webview</div>
       </div>
       <div class="dl-links">
-        <a class="dl-btn" href="https://github.com/teslasolar/thehole/releases/latest/download/THE.HOLE.BROWSER_amd64.deb">.deb</a>
-        <a class="dl-btn secondary" href="https://github.com/teslasolar/thehole/releases/latest/download/THE.HOLE.BROWSER_amd64.AppImage">.AppImage</a>
-        <a class="dl-btn secondary" href="https://github.com/teslasolar/thehole/releases/latest/download/THE.HOLE.BROWSER.x86_64.rpm">.rpm</a>
+        <a class="dl-btn" href="https://github.com/teslasolar/TheHole/releases/latest/download/THE%20HOLE%20BROWSER_0.1.0_amd64.deb">.deb</a>
+        <a class="dl-btn secondary" href="https://github.com/teslasolar/TheHole/releases/latest/download/THE%20HOLE%20BROWSER_0.1.0_amd64.AppImage">.AppImage</a>
+        <a class="dl-btn secondary" href="https://github.com/teslasolar/TheHole/releases/latest/download/THE%20HOLE%20BROWSER-0.1.0-1.x86_64.rpm">.rpm</a>
       </div>
     </div>
 
@@ -150,7 +164,7 @@ a{color:#1a1a1a}
         <div class="platform-meta">WebKit &middot; system webview</div>
       </div>
       <div class="dl-links">
-        <a class="dl-btn" href="https://github.com/teslasolar/thehole/releases/latest/download/THE.HOLE.BROWSER_aarch64.dmg">.dmg</a>
+        <a class="dl-btn" href="https://github.com/teslasolar/TheHole/releases/latest/download/THE%20HOLE%20BROWSER_0.1.0_aarch64.dmg">.dmg</a>
       </div>
     </div>
 
@@ -160,7 +174,7 @@ a{color:#1a1a1a}
         <div class="platform-meta">WebKit &middot; system webview</div>
       </div>
       <div class="dl-links">
-        <a class="dl-btn" href="https://github.com/teslasolar/thehole/releases/latest/download/THE.HOLE.BROWSER_x64.dmg">.dmg</a>
+        <a class="dl-btn" href="https://github.com/teslasolar/TheHole/releases/latest/download/THE%20HOLE%20BROWSER_0.1.0_x64.dmg">.dmg</a>
       </div>
     </div>
 
@@ -170,8 +184,8 @@ a{color:#1a1a1a}
         <div class="platform-meta">WebView2 &middot; system webview</div>
       </div>
       <div class="dl-links">
-        <a class="dl-btn" href="https://github.com/teslasolar/thehole/releases/latest/download/THE.HOLE.BROWSER_x64-setup.exe">.exe installer</a>
-        <a class="dl-btn secondary" href="https://github.com/teslasolar/thehole/releases/latest/download/THE.HOLE.BROWSER_x64.msi">.msi</a>
+        <a class="dl-btn" href="https://github.com/teslasolar/TheHole/releases/latest/download/THE%20HOLE%20BROWSER_0.1.0_x64-setup.exe">.exe installer</a>
+        <a class="dl-btn secondary" href="https://github.com/teslasolar/TheHole/releases/latest/download/THE%20HOLE%20BROWSER_0.1.0_x64_en-US.msi">.msi</a>
       </div>
     </div>
 
@@ -181,7 +195,7 @@ a{color:#1a1a1a}
         <div class="platform-meta">System WebView</div>
       </div>
       <div class="dl-links">
-        <a class="dl-btn" href="https://github.com/teslasolar/thehole/releases/latest/download/THE.HOLE.BROWSER.apk">.apk</a>
+        <a class="dl-btn" href="https://github.com/teslasolar/TheHole/releases/latest/download/app-universal-release.apk">.apk</a>
       </div>
     </div>
 
@@ -194,6 +208,12 @@ a{color:#1a1a1a}
         <span class="dl-btn secondary" style="opacity:0.5;cursor:default">TestFlight (soon)</span>
       </div>
     </div>
+
+    <p style="font-size:12px;color:#999;margin-top:12px;text-align:center">
+      All downloads from <a href="https://github.com/teslasolar/TheHole/releases" style="color:#888">GitHub Releases</a>.
+      No release yet? <a href="#source" style="color:#888">Build from source</a> or grab
+      <a href="https://github.com/teslasolar/TheHole/actions" style="color:#888">CI artifacts</a>.
+    </p>
   </div>
 
   <!-- ═══ FEATURES ═══ -->
@@ -351,5 +371,65 @@ cargo tauri ios build</code></pre>
 
 </div>
 
+<script>
+// Detect platform and highlight the right download
+(function(){
+  var ua = navigator.userAgent || '';
+  var p = navigator.platform || '';
+  var det = document.getElementById('platform-detect');
+  var name = document.getElementById('detect-name');
+  var arch = document.getElementById('detect-arch');
+  var links = document.getElementById('detect-links');
+  var base = 'https://github.com/teslasolar/TheHole/releases/latest/download/';
+
+  function btn(href, label, primary) {
+    return '<a class="dl-btn' + (primary ? '' : ' secondary') + '" href="' + href + '">' + label + '</a>';
+  }
+
+  if (/Android/i.test(ua)) {
+    name.textContent = 'Android';
+    arch.textContent = 'detected';
+    links.innerHTML = btn(base + 'app-universal-release.apk', 'Download .apk', true);
+  } else if (/iPhone|iPad|iPod/i.test(ua)) {
+    name.textContent = 'iOS';
+    arch.textContent = 'detected';
+    links.innerHTML = '<span class="dl-btn secondary" style="opacity:0.5;cursor:default">TestFlight (soon)</span>';
+  } else if (/Win/i.test(p)) {
+    name.textContent = 'Windows';
+    arch.textContent = 'x86_64 detected';
+    links.innerHTML = btn(base + 'THE%20HOLE%20BROWSER_0.1.0_x64-setup.exe', 'Download .exe', true) +
+      btn(base + 'THE%20HOLE%20BROWSER_0.1.0_x64_en-US.msi', '.msi', false);
+  } else if (/Mac/i.test(p)) {
+    var isArm = /arm|aarch/i.test(ua) || (navigator.userAgentData && navigator.userAgentData.architecture === 'arm');
+    if (isArm || /Apple\s?M/i.test(ua) || !(/Intel/i.test(ua))) {
+      name.textContent = 'macOS';
+      arch.textContent = 'Apple Silicon detected';
+      links.innerHTML = btn(base + 'THE%20HOLE%20BROWSER_0.1.0_aarch64.dmg', 'Download .dmg', true);
+    } else {
+      name.textContent = 'macOS';
+      arch.textContent = 'Intel detected';
+      links.innerHTML = btn(base + 'THE%20HOLE%20BROWSER_0.1.0_x64.dmg', 'Download .dmg', true);
+    }
+  } else if (/Linux/i.test(p)) {
+    name.textContent = 'Linux';
+    arch.textContent = 'x86_64 detected';
+    links.innerHTML = btn(base + 'THE%20HOLE%20BROWSER_0.1.0_amd64.deb', 'Download .deb', true) +
+      btn(base + 'THE%20HOLE%20BROWSER_0.1.0_amd64.AppImage', '.AppImage', false) +
+      btn(base + 'THE%20HOLE%20BROWSER-0.1.0-1.x86_64.rpm', '.rpm', false);
+  }
+
+  if (links.innerHTML) det.style.display = '';
+
+  // Check if release exists — show banner if not
+  var xhr = new XMLHttpRequest();
+  xhr.open('HEAD', base + 'THE%20HOLE%20BROWSER_0.1.0_amd64.deb', true);
+  xhr.onreadystatechange = function() {
+    if (xhr.readyState === 4 && xhr.status === 404) {
+      document.getElementById('no-release-banner').style.display = '';
+    }
+  };
+  xhr.send();
+})();
+</script>
 </body>
 </html>
