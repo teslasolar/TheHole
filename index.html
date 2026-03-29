@@ -133,8 +133,8 @@ a{color:#1a1a1a}
     <h2>Download BLOOM</h2>
 
     <div id="no-release-banner" class="note" style="display:none;background:#fff8e1;border-left:3px solid #f9a825;padding:12px 16px;margin-bottom:20px;font-size:13px;color:#555;border-radius:0 4px 4px 0">
-      No release published yet. Downloads will work once the first release is tagged.
-      For now, <a href="#source">build from source</a> or grab CI artifacts from
+      Binaries not uploaded yet &mdash; CI is building them now.
+      Meanwhile, <a href="#source">build from source</a> or grab CI artifacts from
       <a href="https://github.com/teslasolar/TheHole/actions">GitHub Actions</a>.
     </div>
 
@@ -326,8 +326,8 @@ a{color:#1a1a1a}
   <div class="source" id="source">
     <h2>Build from source</h2>
     <pre><code><span class="comment"># Clone</span>
-git clone https://github.com/teslasolar/thehole.git
-cd thehole
+git clone https://github.com/teslasolar/TheHole.git
+cd TheHole
 
 <span class="comment"># Install Rust (if needed)</span>
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
@@ -361,8 +361,8 @@ cargo tauri ios build</code></pre>
 
   <!-- ═══ FOOTER ═══ -->
   <div class="footer">
-    <a href="https://github.com/teslasolar/thehole">GitHub</a> &middot;
-    <a href="https://github.com/teslasolar/thehole/releases">Releases</a> &middot;
+    <a href="https://github.com/teslasolar/TheHole">GitHub</a> &middot;
+    <a href="https://github.com/teslasolar/TheHole/releases">Releases</a> &middot;
     <a href="pages/about.html">About</a> &middot;
     <a href="donations/">Donate</a> &middot;
     MIT License &middot;
@@ -420,15 +420,17 @@ cargo tauri ios build</code></pre>
 
   if (links.innerHTML) det.style.display = '';
 
-  // Check if release exists — show banner if not
-  var xhr = new XMLHttpRequest();
-  xhr.open('HEAD', base + 'THE%20HOLE%20BROWSER_0.1.0_amd64.deb', true);
-  xhr.onreadystatechange = function() {
-    if (xhr.readyState === 4 && xhr.status === 404) {
+  // Check if release has assets via GitHub API (CORS-friendly)
+  fetch('https://api.github.com/repos/teslasolar/TheHole/releases/tags/v0.1.0')
+    .then(function(r) { return r.json(); })
+    .then(function(data) {
+      if (!data.assets || data.assets.length === 0) {
+        document.getElementById('no-release-banner').style.display = '';
+      }
+    })
+    .catch(function() {
       document.getElementById('no-release-banner').style.display = '';
-    }
-  };
-  xhr.send();
+    });
 })();
 </script>
 </body>
