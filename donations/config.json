@@ -5,8 +5,8 @@
   "accounts": {
     "venmo": {
       "enabled": true,
-      "username": "@thomasfrumkin",
-      "url": "https://venmo.com/thomasfrumkin",
+      "username": "@Thomas-Frumkin",
+      "url": "https://venmo.com/u/Thomas-Frumkin",
       "label": "Venmo",
       "color": "#008CFF",
       "text_color": "#ffffff"
