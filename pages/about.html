@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>About — THE HOLE</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:system-ui,-apple-system,sans-serif;background:#fafaf8;color:#1a1a1a;max-width:650px;margin:0 auto;padding:20px;line-height:1.7}
+a{color:#1a1a1a}
+h1{font-size:28px;margin:40px 0 8px}
+h2{font-size:18px;margin:30px 0 8px}
+p{margin:10px 0;font-size:14px;color:#333}
+.back{font-size:13px;color:#666;text-decoration:none;display:inline-block;margin-bottom:20px}
+.back:hover{color:#1a1a1a}
+code{background:#f0f0f0;padding:1px 4px;border-radius:2px;font-size:13px}
+blockquote{border-left:3px solid #1a1a1a;padding-left:16px;margin:16px 0;color:#555;font-style:italic}
+.tier{display:inline-block;padding:1px 6px;border-radius:2px;font-size:10px;font-weight:700}
+.t1{background:#d4edda;color:#155724}
+.t2{background:#cce5ff;color:#004085}
+.t3{background:#e2e3e5;color:#383d41}
+.footer{text-align:center;margin-top:40px;padding-top:20px;border-top:1px solid #eee;font-size:11px;color:#ccc}
+.footer a{color:#bbb;text-decoration:none}
+</style>
+</head>
+<body>
+
+<a class="back" href="../index.html">&larr; back to downloads</a>
+
+<h1>About THE HOLE</h1>
+
+<p>THE HOLE is a practitioner-first search engine. It indexes primary technical
+sources and ranks them with a transparent, open-source algorithm that rewards
+people who build real things.</p>
+
+<h2>Why it exists</h2>
+
+<p>Google search is broken for technical queries. The first page is SEO-optimized
+listicles, affiliate content, and AI-generated filler. The actual answer &mdash;
+written by someone who built the thing &mdash; is buried on page 3, if it's
+indexed at all.</p>
+
+<p>THE HOLE fixes this by only indexing primary sources and filtering everything
+else out.</p>
+
+<h2>What it indexes</h2>
+
+<p><span class="tier t1">T1</span> <strong>Primary sources</strong> &mdash;
+arXiv, GitHub, PubMed, IETF RFCs. The origin of knowledge.</p>
+
+<p><span class="tier t2">T2</span> <strong>Practitioner sources</strong> &mdash;
+Hacker News, Stack Overflow, Lobsters, and 54+ curated practitioner blogs
+(Julia Evans, Dan Luu, Rachel Kroll, Drew DeVault, and more). Written by
+people who build things.</p>
+
+<p><span class="tier t3">T3</span> <strong>Journalism</strong> &mdash;
+Vetted tech reporting. Rare, deprioritized unless it adds signal.</p>
+
+<h2>How ranking works</h2>
+
+<p>Every document gets a composite score from six signals:</p>
+
+<ul style="font-size:14px;margin:10px 0 10px 20px">
+  <li><strong>Slop score</strong> (25%) &mdash; is the content clean?</li>
+  <li><strong>Practitioner score</strong> (25%) &mdash; does the author build things?</li>
+  <li><strong>Citation score</strong> (20%) &mdash; do other primary sources link to this?</li>
+  <li><strong>Freshness</strong> (15%) &mdash; exponential decay, 180-day half-life</li>
+  <li><strong>Depth</strong> (10%) &mdash; word count, code blocks, data, citations</li>
+  <li><strong>Source tier</strong> (5%) &mdash; base score from the platform</li>
+</ul>
+
+<p>The entire algorithm is
+<a href="https://github.com/teslasolar/thehole/blob/main/rankers/ranker.py">public</a>.
+This is deliberate.</p>
+
+<blockquote>If knowing the algorithm lets you game it, the algorithm is bad.</blockquote>
+
+<h2>Anti-gaming</h2>
+
+<p>THE HOLE's ranking resists gaming structurally:</p>
+
+<ul style="font-size:14px;margin:10px 0 10px 20px">
+  <li>Practitioner score requires real GitHub commits over months/years</li>
+  <li>Citation score requires real inbound links from Tier 1 sources</li>
+  <li>Slop filter penalizes the exact things SEO gamers do</li>
+  <li>The optimal strategy for ranking well is: write real content about things you actually built</li>
+</ul>
+
+<blockquote>The game theory IS the alignment.</blockquote>
+
+<h2>About BLOOM</h2>
+
+<p>BLOOM is THE HOLE as a standalone browser. Built with Tauri (Rust + system
+webview), it's ~4MB instead of Chrome's ~300MB. It doesn't ship Chromium.
+It doesn't track you. The address bar IS the search engine.</p>
+
+<p>Every page you visit is analyzed by the slop shield. Tracking scripts are
+blocked. Affiliate links are dimmed. LLM-generated content is flagged.
+Reader mode strips pages to clean text.</p>
+
+<p>Your bookmarks and history stay on your machine. There's no cloud sync,
+no account, no telemetry. The browser forgets you exist when you close it.</p>
+
+<div class="footer">
+  <a href="https://github.com/teslasolar/thehole">source</a> &middot;
+  MIT License &middot;
+  no ads &middot; no tracking
+</div>
+
+</body>
+</html>

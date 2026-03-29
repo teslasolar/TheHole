@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Changelog — THE HOLE</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:system-ui,-apple-system,sans-serif;background:#fafaf8;color:#1a1a1a;max-width:650px;margin:0 auto;padding:20px;line-height:1.7}
+a{color:#1a1a1a}
+h1{font-size:28px;margin:40px 0 8px}
+h2{font-size:16px;margin:30px 0 4px;padding-top:16px;border-top:1px solid #eee}
+h2:first-of-type{border-top:none;padding-top:0}
+.date{font-size:12px;color:#888;margin-bottom:8px}
+ul{margin:8px 0 8px 20px;font-size:14px}
+li{margin:4px 0;color:#333}
+.tag{display:inline-block;padding:1px 6px;border-radius:2px;font-size:10px;font-weight:600;margin-right:4px}
+.new{background:#d4edda;color:#155724}
+.fix{background:#fff3cd;color:#856404}
+.breaking{background:#f8d7da;color:#721c24}
+.back{font-size:13px;color:#666;text-decoration:none;display:inline-block;margin-bottom:20px}
+.back:hover{color:#1a1a1a}
+.footer{text-align:center;margin-top:40px;padding-top:20px;border-top:1px solid #eee;font-size:11px;color:#ccc}
+.footer a{color:#bbb;text-decoration:none}
+</style>
+</head>
+<body>
+
+<a class="back" href="../index.html">&larr; back to downloads</a>
+
+<h1>Changelog</h1>
+
+<h2>v0.1.0 — Initial Release</h2>
+<div class="date">2026-03-29</div>
+<ul>
+  <li><span class="tag new">new</span> THE HOLE search engine with Lunr.js client-side search</li>
+  <li><span class="tag new">new</span> BLOOM browser built on Tauri v2 (Rust + system webview)</li>
+  <li><span class="tag new">new</span> 9 source spiders: arXiv, GitHub, HN, Stack Overflow, PubMed, blogs, RFCs, Lobsters, Fediverse</li>
+  <li><span class="tag new">new</span> Slop filter with 15+ detection rules (affiliates, LLM content, keyword stuffing, listicles)</li>
+  <li><span class="tag new">new</span> HoleRanker with 6-signal composite scoring</li>
+  <li><span class="tag new">new</span> Slop shield: per-page content analysis in the browser</li>
+  <li><span class="tag new">new</span> Reader mode (Ctrl+R): strip pages to clean text</li>
+  <li><span class="tag new">new</span> Source shortcuts: <code>:gh</code>, <code>:arxiv</code>, <code>:hn</code>, <code>:so</code></li>
+  <li><span class="tag new">new</span> Google fallback with <code>!</code> prefix</li>
+  <li><span class="tag new">new</span> SQLite local storage (bookmarks, history, settings)</li>
+  <li><span class="tag new">new</span> Ad/tracker blocking (100+ domains)</li>
+  <li><span class="tag new">new</span> Cross-platform: Linux (.deb, .AppImage, .rpm), macOS (ARM + Intel .dmg), Windows (.exe, .msi), Android (.apk)</li>
+  <li><span class="tag new">new</span> 54 curated practitioner blogs in the blog spider</li>
+  <li><span class="tag new">new</span> Full test suite (78 tests passing)</li>
+  <li><span class="tag new">new</span> CI/CD: cross-platform builds + monthly index rebuild</li>
+</ul>
+
+<div class="footer">
+  <a href="https://github.com/teslasolar/thehole/releases">All releases on GitHub</a>
+</div>
+
+</body>
+</html>
