@@ -1,0 +1,20 @@
+/* ═══ PROMISES COMPONENT ═══ */
+
+.promises {
+  margin: 40px 0;
+}
+.promises h2 {
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 12px;
+  padding-bottom: 8px;
+  border-bottom: 2px solid #1a1a1a;
+}
+.promise {
+  padding: 8px 0;
+  font-size: 14px;
+  color: #333;
+}
+.promise strong {
+  color: #1a1a1a;
+}

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Fund THE HOLE</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:system-ui,-apple-system,sans-serif;background:#fafaf8;color:#1a1a1a;max-width:600px;margin:0 auto;padding:20px;line-height:1.7}
+a{color:#1a1a1a}
+.back{font-size:13px;color:#666;text-decoration:none;display:inline-block;margin-bottom:20px}
+.back:hover{color:#1a1a1a}
+.hero{text-align:center;padding:50px 0 30px}
+.hero .icon{font-size:48px}
+.hero h1{font-size:28px;font-weight:800;margin-top:8px}
+.hero .sub{color:#666;font-size:14px;margin-top:6px}
+.pitch{margin:20px 0 30px;font-size:14px;color:#333;text-align:center}
+.footer{text-align:center;margin-top:40px;padding-top:20px;border-top:1px solid #eee;font-size:11px;color:#ccc}
+.footer a{color:#bbb;text-decoration:none}
+@media(max-width:500px){
+  .hero{padding:30px 0 20px}
+  .hero h1{font-size:22px}
+}
+</style>
+<link rel="stylesheet" href="components/buttons.css">
+<link rel="stylesheet" href="components/costs.css">
+<link rel="stylesheet" href="components/promises.css">
+</head>
+<body>
+
+<a class="back" href="../index.html">&larr; back</a>
+
+<div class="hero">
+  <div class="icon">&#x1F573;&#xFE0F;</div>
+  <h1>FUND THE HOLE</h1>
+  <div class="sub" id="donate-tagline">send money for make the hole</div>
+</div>
+
+<p class="pitch">THE HOLE is free, open source, and has zero ads. It stays alive because
+people who use it throw money at it. Every dollar goes to servers, indexing, and
+keeping the lights on. No investors. No board. Just a hole.</p>
+
+<!-- Buttons rendered from config.json -->
+<div class="donate-options" id="donate-buttons">
+  <!-- Fallback for no-JS -->
+  <noscript>
+    <a class="donate-btn" href="https://venmo.com/thomasfrumkin"
+       style="background:#008CFF;color:#fff;border-color:#008CFF;display:flex;align-items:center;justify-content:center;padding:16px 24px;border-radius:6px;text-decoration:none;font-size:16px;font-weight:700">
+      Venmo (@thomasfrumkin)
+    </a>
+  </noscript>
+</div>
+
+<!-- Costs rendered from config.json -->
+<div class="costs">
+  <h2>Where the money goes</h2>
+  <div id="donate-costs"></div>
+</div>
+
+<!-- Promises rendered from config.json -->
+<div class="promises">
+  <h2>Promises</h2>
+  <div id="donate-promises"></div>
+</div>
+
+<div class="footer">
+  <a href="../index.html">home</a> &middot;
+  <a href="https://github.com/teslasolar/thehole">source</a> &middot;
+  you're funding a hole in the internet and that's beautiful
+</div>
+
+<script src="components/render.js"></script>
+</body>
+</html>
