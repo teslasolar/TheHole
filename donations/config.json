@@ -20,9 +20,9 @@
       "text_color": "#fafaf8"
     },
     "kofi": {
-      "enabled": false,
-      "username": "",
-      "url": "https://ko-fi.com/",
+      "enabled": true,
+      "username": "thomasfrumkinteslasolar",
+      "url": "https://ko-fi.com/thomasfrumkinteslasolar",
       "label": "Ko-fi",
       "color": "#FF5E5B",
       "text_color": "#ffffff"
