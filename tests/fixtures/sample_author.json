@@ -1,0 +1,13 @@
+{
+  "name": "Julia Evans",
+  "author_id": "jvns",
+  "github_url": "https://github.com/jvns",
+  "website": "https://jvns.ca",
+  "github_repos": 45,
+  "github_commits": 1200,
+  "papers": 0,
+  "known_sources": ["personal_blog"],
+  "source_tier": 1,
+  "bio": "Software engineer who writes about debugging, networking, and systems programming.",
+  "tags": ["linux", "networking", "debugging", "zines"]
+}
