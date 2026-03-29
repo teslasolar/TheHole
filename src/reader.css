@@ -1,0 +1,412 @@
+/*
+ * THE HOLE -- Reader Mode Stylesheet
+ * Clean typography for distraction-free reading.
+ * Applied when the user activates reader mode (Ctrl+R) in the BLOOM browser.
+ */
+
+/* === TRANSITION === */
+
+.hole-reader-enter {
+  animation: hole-reader-fade-in 0.3s ease-out;
+}
+
+.hole-reader-exit {
+  animation: hole-reader-fade-out 0.2s ease-in;
+}
+
+@keyframes hole-reader-fade-in {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes hole-reader-fade-out {
+  from { opacity: 1; transform: translateY(0); }
+  to   { opacity: 0; transform: translateY(8px); }
+}
+
+/* === LAYOUT === */
+
+.hole-reader {
+  font-family: Georgia, 'Times New Roman', 'Noto Serif', serif;
+  font-size: 18px;
+  line-height: 1.7;
+  color: #1a1a1a;
+  background: #fafaf8;
+  max-width: 650px;
+  margin: 0 auto;
+  padding: 40px 20px 80px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* === METADATA BAR === */
+
+.hole-reader-meta {
+  font-family: system-ui, -apple-system, sans-serif;
+  font-size: 12px;
+  color: #888;
+  border-bottom: 2px solid #1a1a1a;
+  padding-bottom: 12px;
+  margin-bottom: 32px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 16px;
+  align-items: baseline;
+}
+
+.hole-reader-meta-item {
+  white-space: nowrap;
+}
+
+.hole-reader-meta-label {
+  color: #bbb;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  font-size: 10px;
+  margin-right: 4px;
+}
+
+.hole-reader-meta .tier-badge {
+  display: inline-block;
+  padding: 1px 6px;
+  border-radius: 2px;
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  vertical-align: baseline;
+}
+
+.hole-reader-meta .tier-1 { background: #d4edda; color: #155724; }
+.hole-reader-meta .tier-2 { background: #cce5ff; color: #004085; }
+.hole-reader-meta .tier-3 { background: #e2e3e5; color: #383d41; }
+.hole-reader-meta .tier-4 { background: #f8f8f8; color: #999; }
+
+.hole-reader-meta .slop-clean { color: #155724; }
+.hole-reader-meta .slop-warn  { color: #856404; }
+.hole-reader-meta .slop-bad   { color: #721c24; }
+
+.hole-reader-meta .practitioner-score {
+  color: #b45309;
+  font-weight: 600;
+}
+
+/* === HEADINGS === */
+
+.hole-reader h1 {
+  font-size: 32px;
+  font-weight: 700;
+  line-height: 1.2;
+  margin: 0 0 8px;
+  color: #1a1a1a;
+  letter-spacing: -0.5px;
+}
+
+.hole-reader h2 {
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 1.3;
+  margin: 40px 0 12px;
+  color: #1a1a1a;
+}
+
+.hole-reader h3 {
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 1.4;
+  margin: 32px 0 8px;
+  color: #1a1a1a;
+}
+
+.hole-reader h4,
+.hole-reader h5,
+.hole-reader h6 {
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 1.4;
+  margin: 24px 0 8px;
+  color: #333;
+}
+
+/* === PARAGRAPHS === */
+
+.hole-reader p {
+  margin: 0 0 18px;
+}
+
+/* === LINKS === */
+
+.hole-reader a {
+  color: #1a1a1a;
+  text-decoration: underline;
+  text-decoration-color: #ccc;
+  text-underline-offset: 2px;
+  transition: text-decoration-color 0.15s;
+}
+
+.hole-reader a:hover {
+  text-decoration-color: #1a1a1a;
+}
+
+/* Affiliate links are dimmed */
+.hole-reader a[data-hole-affiliate],
+.hole-reader a.hole-affiliate {
+  opacity: 0.3;
+  text-decoration: line-through;
+  text-decoration-color: #c0392b;
+}
+
+.hole-reader a[data-hole-affiliate]::after,
+.hole-reader a.hole-affiliate::after {
+  content: ' [affiliate]';
+  font-size: 10px;
+  color: #999;
+  font-style: italic;
+  text-decoration: none;
+  opacity: 1;
+}
+
+/* === BLOCKQUOTES === */
+
+.hole-reader blockquote {
+  border-left: 3px solid #ddd;
+  margin: 20px 0;
+  padding: 4px 0 4px 20px;
+  color: #555;
+  font-style: italic;
+}
+
+.hole-reader blockquote p:last-child {
+  margin-bottom: 0;
+}
+
+/* === CODE === */
+
+.hole-reader code {
+  font-family: 'SF Mono', 'Fira Code', 'Cascadia Code', 'JetBrains Mono', Consolas, 'Liberation Mono', Menlo, monospace;
+  font-size: 0.85em;
+  background: #f0f0f0;
+  padding: 2px 5px;
+  border-radius: 3px;
+  color: #333;
+}
+
+.hole-reader pre {
+  background: #f5f5f3;
+  border: 1px solid #e0e0e0;
+  border-radius: 4px;
+  padding: 16px;
+  overflow-x: auto;
+  margin: 20px 0;
+  line-height: 1.5;
+}
+
+.hole-reader pre code {
+  background: none;
+  padding: 0;
+  border-radius: 0;
+  font-size: 14px;
+  color: #1a1a1a;
+  white-space: pre;
+  word-wrap: normal;
+}
+
+/* === IMAGES === */
+
+.hole-reader img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 24px auto;
+  border-radius: 2px;
+}
+
+.hole-reader figure {
+  margin: 24px 0;
+  text-align: center;
+}
+
+.hole-reader figcaption {
+  font-family: system-ui, -apple-system, sans-serif;
+  font-size: 13px;
+  color: #888;
+  margin-top: 8px;
+  font-style: italic;
+}
+
+/* === LISTS === */
+
+.hole-reader ul,
+.hole-reader ol {
+  margin: 0 0 18px;
+  padding-left: 28px;
+}
+
+.hole-reader li {
+  margin-bottom: 6px;
+}
+
+.hole-reader li > ul,
+.hole-reader li > ol {
+  margin-top: 6px;
+  margin-bottom: 0;
+}
+
+/* === TABLES === */
+
+.hole-reader table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 20px 0;
+  font-size: 15px;
+}
+
+.hole-reader th,
+.hole-reader td {
+  border: 1px solid #ddd;
+  padding: 8px 12px;
+  text-align: left;
+}
+
+.hole-reader th {
+  background: #f5f5f3;
+  font-weight: 700;
+  font-family: system-ui, -apple-system, sans-serif;
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: #555;
+}
+
+/* === HORIZONTAL RULES === */
+
+.hole-reader hr {
+  border: none;
+  border-top: 1px solid #ddd;
+  margin: 40px 0;
+}
+
+/* === DARK THEME === */
+
+.hole-reader.dark {
+  color: #e0e0e0;
+  background: #1a1a1a;
+}
+
+.hole-reader.dark h1,
+.hole-reader.dark h2,
+.hole-reader.dark h3,
+.hole-reader.dark h4,
+.hole-reader.dark h5,
+.hole-reader.dark h6 {
+  color: #f0f0f0;
+}
+
+.hole-reader.dark a {
+  color: #e0e0e0;
+  text-decoration-color: #555;
+}
+
+.hole-reader.dark a:hover {
+  text-decoration-color: #e0e0e0;
+}
+
+.hole-reader.dark blockquote {
+  border-left-color: #444;
+  color: #aaa;
+}
+
+.hole-reader.dark code {
+  background: #2a2a2a;
+  color: #ddd;
+}
+
+.hole-reader.dark pre {
+  background: #222;
+  border-color: #333;
+}
+
+.hole-reader.dark pre code {
+  color: #ddd;
+}
+
+.hole-reader.dark th {
+  background: #2a2a2a;
+  color: #ccc;
+}
+
+.hole-reader.dark td {
+  border-color: #333;
+}
+
+.hole-reader.dark hr {
+  border-top-color: #333;
+}
+
+.hole-reader.dark .hole-reader-meta {
+  color: #777;
+  border-bottom-color: #e0e0e0;
+}
+
+.hole-reader.dark .hole-reader-meta-label {
+  color: #555;
+}
+
+.hole-reader.dark img {
+  opacity: 0.9;
+}
+
+/* === RESPONSIVE === */
+
+@media (max-width: 700px) {
+  .hole-reader {
+    font-size: 16px;
+    padding: 24px 16px 60px;
+  }
+
+  .hole-reader h1 {
+    font-size: 26px;
+  }
+
+  .hole-reader h2 {
+    font-size: 21px;
+  }
+
+  .hole-reader pre {
+    padding: 12px;
+    font-size: 13px;
+  }
+
+  .hole-reader-meta {
+    gap: 4px 12px;
+  }
+}
+
+/* === PRINT === */
+
+@media print {
+  .hole-reader {
+    max-width: none;
+    font-size: 12pt;
+    color: #000;
+    background: #fff;
+  }
+
+  .hole-reader a {
+    color: #000;
+    text-decoration: underline;
+  }
+
+  .hole-reader a[data-hole-affiliate],
+  .hole-reader a.hole-affiliate {
+    display: none;
+  }
+
+  .hole-reader pre {
+    border: 1px solid #ccc;
+    page-break-inside: avoid;
+  }
+
+  .hole-reader img {
+    page-break-inside: avoid;
+  }
+}
