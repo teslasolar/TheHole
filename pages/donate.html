@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Fund THE HOLE</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:system-ui,-apple-system,sans-serif;background:#fafaf8;color:#1a1a1a;max-width:600px;margin:0 auto;padding:20px;line-height:1.7}
+a{color:#1a1a1a}
+.back{font-size:13px;color:#666;text-decoration:none;display:inline-block;margin-bottom:20px}
+.back:hover{color:#1a1a1a}
+.hero{text-align:center;padding:50px 0 30px}
+.hero .icon{font-size:48px}
+.hero h1{font-size:28px;font-weight:800;margin-top:8px}
+.hero .sub{color:#666;font-size:14px;margin-top:6px}
+
+.pitch{margin:20px 0 30px;font-size:14px;color:#333;text-align:center}
+
+/* ═══ DONATE BUTTONS ═══ */
+.donate-options{display:flex;flex-direction:column;gap:12px;margin:30px 0}
+.donate-btn{display:flex;align-items:center;justify-content:center;gap:10px;padding:16px 24px;border-radius:6px;text-decoration:none;font-size:16px;font-weight:700;transition:all .15s;border:2px solid}
+.donate-btn:hover{transform:translateY(-1px)}
+
+.venmo{background:#008CFF;color:#fff;border-color:#008CFF}
+.venmo:hover{background:#0070cc;color:#fff}
+
+.github-sponsors{background:#1a1a1a;color:#fafaf8;border-color:#1a1a1a}
+.github-sponsors:hover{background:#333;color:#fafaf8}
+
+.kofi{background:#FF5E5B;color:#fff;border-color:#FF5E5B}
+.kofi:hover{background:#e04e4b;color:#fff}
+
+.buymeacoffee{background:#FFDD00;color:#1a1a1a;border-color:#FFDD00}
+.buymeacoffee:hover{background:#e6c700}
+
+.crypto{background:#fff;color:#1a1a1a;border-color:#ddd}
+.crypto:hover{border-color:#1a1a1a}
+
+/* ═══ WHAT IT PAYS FOR ═══ */
+.costs{margin:40px 0}
+.costs h2{font-size:18px;font-weight:700;margin-bottom:12px;padding-bottom:8px;border-bottom:2px solid #1a1a1a}
+.cost-item{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid #eee;font-size:14px}
+.cost-item:last-child{border-bottom:none}
+.cost-label{color:#333}
+.cost-amount{font-weight:700;color:#1a1a1a}
+.cost-total{display:flex;justify-content:space-between;padding:10px 0;font-size:15px;font-weight:700;border-top:2px solid #1a1a1a;margin-top:4px}
+
+/* ═══ PROMISES ═══ */
+.promises{margin:40px 0}
+.promises h2{font-size:18px;font-weight:700;margin-bottom:12px;padding-bottom:8px;border-bottom:2px solid #1a1a1a}
+.promise{padding:8px 0;font-size:14px;color:#333}
+.promise strong{color:#1a1a1a}
+
+.footer{text-align:center;margin-top:40px;padding-top:20px;border-top:1px solid #eee;font-size:11px;color:#ccc}
+.footer a{color:#bbb;text-decoration:none}
+
+@media(max-width:500px){
+  .hero{padding:30px 0 20px}
+  .hero h1{font-size:22px}
+}
+</style>
+</head>
+<body>
+
+<a class="back" href="../index.html">&larr; back</a>
+
+<div class="hero">
+  <div class="icon">&#x1F573;&#xFE0F;</div>
+  <h1>FUND THE HOLE</h1>
+  <div class="sub">send money for make the hole</div>
+</div>
+
+<p class="pitch">THE HOLE is free, open source, and has zero ads. It stays alive because
+people who use it throw money at it. Every dollar goes to servers, indexing, and
+keeping the lights on. No investors. No board. Just a hole.</p>
+
+<div class="donate-options">
+  <a class="donate-btn venmo" href="https://venmo.com/thehole">
+    <span>Venmo</span>
+  </a>
+
+  <a class="donate-btn github-sponsors" href="https://github.com/sponsors/teslasolar">
+    <span>GitHub Sponsors</span>
+  </a>
+
+  <a class="donate-btn kofi" href="https://ko-fi.com/thehole">
+    <span>Ko-fi</span>
+  </a>
+
+  <a class="donate-btn buymeacoffee" href="https://buymeacoffee.com/thehole">
+    <span>Buy Me a Coffee</span>
+  </a>
+</div>
+
+<!-- ═══ WHAT IT PAYS FOR ═══ -->
+<div class="costs">
+  <h2>Where the money goes</h2>
+  <div class="cost-item">
+    <span class="cost-label">Domain (thehole.dev or similar)</span>
+    <span class="cost-amount">$12/yr</span>
+  </div>
+  <div class="cost-item">
+    <span class="cost-label">MeiliSearch VPS (v2 index server)</span>
+    <span class="cost-amount">$5-20/mo</span>
+  </div>
+  <div class="cost-item">
+    <span class="cost-label">GitHub Pages (current hosting)</span>
+    <span class="cost-amount">$0</span>
+  </div>
+  <div class="cost-item">
+    <span class="cost-label">Apple Developer Program (iOS builds)</span>
+    <span class="cost-amount">$99/yr</span>
+  </div>
+  <div class="cost-item">
+    <span class="cost-label">CI build minutes (GitHub Actions)</span>
+    <span class="cost-amount">$0</span>
+  </div>
+  <div class="cost-item">
+    <span class="cost-label">Coffee for the person building this</span>
+    <span class="cost-amount">varies</span>
+  </div>
+  <div class="cost-total">
+    <span>Total monthly burn</span>
+    <span>~$20-50</span>
+  </div>
+</div>
+
+<!-- ═══ PROMISES ═══ -->
+<div class="promises">
+  <h2>Promises</h2>
+  <div class="promise"><strong>No ads, ever.</strong> Donations fund THE HOLE. Not advertisers.</div>
+  <div class="promise"><strong>No investor money.</strong> No one gets to tell THE HOLE what to index.</div>
+  <div class="promise"><strong>Stays open source.</strong> MIT license. Fork it if I get hit by a bus.</div>
+  <div class="promise"><strong>Transparent spending.</strong> I'll post costs publicly if people ask.</div>
+  <div class="promise"><strong>No premium tier.</strong> Everyone gets the same HOLE. No "pro" features behind a paywall.</div>
+</div>
+
+<div class="footer">
+  <a href="../index.html">home</a> &middot;
+  <a href="https://github.com/teslasolar/thehole">source</a> &middot;
+  you're funding a hole in the internet and that's beautiful
+</div>
+
+</body>
+</html>
