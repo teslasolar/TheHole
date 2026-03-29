@@ -1,0 +1,62 @@
+name: Monthly Re-Index
+
+on:
+  schedule:
+    # Run at 04:00 UTC on the 1st of every month
+    - cron: '0 4 1 * *'
+  workflow_dispatch:
+    inputs:
+      threshold:
+        description: 'Slop filter threshold'
+        required: false
+        default: '-30'
+
+permissions:
+  contents: write
+
+jobs:
+  reindex:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: 'pip'
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Run all spiders
+        run: python scripts/crawl.py --source=all
+        env:
+          PYTHONPATH: ${{ github.workspace }}
+
+      - name: Build search index
+        run: |
+          python scripts/build_index.py \
+            --threshold ${{ github.event.inputs.threshold || '-30' }}
+        env:
+          PYTHONPATH: ${{ github.workspace }}
+
+      - name: Validate index integrity
+        run: python scripts/validate.py
+        env:
+          PYTHONPATH: ${{ github.workspace }}
+
+      - name: Commit updated index
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add frontend/index/
+          if git diff --cached --quiet; then
+            echo "No index changes to commit."
+          else
+            git commit -m "chore: monthly re-index $(date -u +%Y-%m-%d)"
+            git push
+          fi
