@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>THE HOLE -- search for things people built</title>
+<meta name="description" content="A practitioner-first search engine. No ads. No tracking. No slop. Find things people actually built.">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{
+  font-family:system-ui,-apple-system,sans-serif;
+  background:#fafaf8;color:#1a1a1a;
+  max-width:700px;margin:0 auto;padding:20px;
+  min-height:100vh;
+}
+
+/* === HOME === */
+.home-header{text-align:center;margin:80px 0 10px}
+.home-header .logo{font-size:36px;letter-spacing:2px}
+.home-header .title{font-size:28px;font-weight:800;margin-top:4px;letter-spacing:1px}
+.sub{text-align:center;color:#666;font-size:14px;margin-bottom:30px}
+.browser-badge{
+  text-align:center;font-size:11px;color:#b45309;
+  font-weight:700;letter-spacing:1px;text-transform:uppercase;
+  margin-bottom:6px;
+}
+
+/* === SEARCH BOX === */
+.search-box{display:flex;gap:8px;margin-bottom:20px}
+.search-box input{
+  flex:1;padding:12px 16px;font-size:16px;
+  border:2px solid #1a1a1a;border-radius:4px;outline:none;
+  background:#fff;
+}
+.search-box input:focus{border-color:#555}
+.search-box button{
+  padding:12px 24px;background:#1a1a1a;color:#fafaf8;
+  border:none;border-radius:4px;font-size:16px;
+  cursor:pointer;font-weight:700;white-space:nowrap;
+}
+.search-box button:hover{background:#333}
+.search-box button:active{background:#000}
+
+/* === FILTERS === */
+.filters{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:16px}
+.filters button{
+  padding:4px 10px;border:1px solid #ddd;
+  border-radius:3px;background:#fff;font-size:12px;
+  cursor:pointer;color:#555;transition:all .15s;
+}
+.filters button:hover{border-color:#999;color:#1a1a1a}
+.filters button.active{background:#1a1a1a;color:#fff;border-color:#1a1a1a}
+
+/* === RESULTS HEADER === */
+.results-header{display:flex;align-items:center;gap:12px;margin-bottom:16px;padding-bottom:12px;border-bottom:2px solid #1a1a1a}
+.results-header .logo-sm{font-size:20px;cursor:pointer;text-decoration:none;white-space:nowrap;font-weight:800;color:#1a1a1a}
+.results-header .search-box{flex:1}
+.results-header .search-box input{width:100%}
+.hide{display:none!important}
+
+/* === STATS === */
+.stats{font-size:12px;color:#999;margin-bottom:12px}
+
+/* === RESULTS === */
+.result{padding:12px 0;border-bottom:1px solid #eee}
+.result:last-child{border-bottom:none}
+.result-header{display:flex;align-items:baseline;gap:6px;flex-wrap:wrap}
+.result-tier{
+  display:inline-block;padding:1px 6px;border-radius:2px;
+  font-size:10px;font-weight:700;text-transform:uppercase;
+  vertical-align:baseline;
+}
+.t1{background:#d4edda;color:#155724}
+.t2{background:#cce5ff;color:#004085}
+.t3{background:#e2e3e5;color:#383d41}
+.t4{background:#f8f8f8;color:#999}
+.result-title{font-size:15px;font-weight:600;line-height:1.3}
+.result-title a{color:#1a1a1a;text-decoration:none}
+.result-title a:hover{text-decoration:underline}
+.result-meta{font-size:12px;color:#888;margin:3px 0}
+.result-scores{font-size:12px;margin:3px 0}
+.result-scores .practitioner{color:#b45309}
+.result-scores .academic{color:#6d28d9}
+.result-snippet{font-size:13px;color:#444;margin:4px 0;line-height:1.4}
+.result-tags{font-size:11px;margin-top:4px}
+.result-tags span{
+  background:#f0f0f0;padding:1px 6px;border-radius:2px;
+  margin-right:4px;color:#666;display:inline-block;margin-bottom:2px;
+}
+
+/* === SLOP BADGE === */
+.slop-badge{
+  display:inline-block;padding:1px 6px;border-radius:2px;
+  font-size:10px;font-weight:700;text-transform:uppercase;
+  margin-left:6px;
+}
+.slop-clean{background:#d4edda;color:#155724}
+.slop-warn{background:#fff3cd;color:#856404}
+.slop-bad{background:#f8d7da;color:#721c24}
+
+/* === SOURCES === */
+.sources{text-align:center;margin:20px 0}
+.sources-label{font-size:11px;color:#999;margin-bottom:8px;text-transform:uppercase;letter-spacing:1px}
+.sources-grid{
+  display:flex;flex-wrap:wrap;justify-content:center;gap:8px;
+}
+.sources-grid .src{
+  padding:4px 10px;border:1px solid #ddd;border-radius:3px;
+  font-size:12px;color:#555;cursor:default;background:#fff;
+}
+
+/* === SHORTCUTS === */
+.shortcuts{
+  text-align:center;font-size:11px;color:#bbb;margin-top:30px;
+  line-height:1.8;
+}
+.shortcuts kbd{
+  background:#f0f0f0;border:1px solid #ddd;border-radius:3px;
+  padding:1px 5px;font-family:monospace;font-size:10px;color:#555;
+}
+
+/* === EMPTY / LOADING === */
+.empty{text-align:center;color:#999;padding:40px 0;font-size:14px}
+.loading{text-align:center;color:#999;padding:40px 0;font-size:14px}
+.error{text-align:center;color:#c0392b;padding:40px 0;font-size:14px}
+
+/* === ABOUT === */
+.about-section{margin:30px 0;font-size:13px;line-height:1.6;color:#555}
+.about-section h2{font-size:16px;color:#1a1a1a;margin:16px 0 8px}
+.about-section code{background:#f0f0f0;padding:1px 4px;border-radius:2px;font-size:12px}
+.about-section a{color:#1a1a1a}
+
+/* === PAGINATION === */
+.pagination{display:flex;justify-content:center;gap:8px;margin-top:20px;padding-top:16px;border-top:1px solid #eee}
+.pagination button{
+  padding:6px 14px;border:1px solid #ddd;border-radius:3px;
+  background:#fff;font-size:13px;cursor:pointer;color:#555;
+}
+.pagination button:hover{border-color:#999;color:#1a1a1a}
+.pagination button:disabled{opacity:.4;cursor:default}
+.pagination .current{font-size:13px;color:#999;padding:6px 8px}
+
+/* === FOOTER === */
+.footer{text-align:center;margin-top:40px;padding-top:20px;border-top:1px solid #eee;font-size:11px;color:#ccc}
+.footer a{color:#bbb;text-decoration:none}
+.footer a:hover{color:#888}
+
+/* === RESPONSIVE === */
+@media(max-width:500px){
+  .home-header{margin:40px 0 10px}
+  .home-header .title{font-size:22px}
+  .search-box button{padding:12px 16px;font-size:14px}
+  .filters{gap:4px}
+  .results-header{flex-wrap:wrap}
+  .results-header .logo-sm{font-size:16px}
+  .shortcuts{display:none}
+}
+</style>
+</head>
+<body>
+
+<!-- === HOME VIEW === -->
+<div id="home-view">
+  <div class="home-header">
+    <div class="logo" aria-hidden="true">&#x1F573;&#xFE0F;</div>
+    <div class="title">THE HOLE</div>
+  </div>
+  <div class="browser-badge" id="bloom-badge" style="display:none">BLOOM</div>
+  <div class="sub">search for things people built</div>
+  <div class="search-box">
+    <input id="q" type="text" placeholder="what are you building?" autofocus
+           aria-label="Search query">
+    <button onclick="drill()" aria-label="Search">DRILL</button>
+  </div>
+
+  <div class="sources">
+    <div class="sources-label">indexed sources</div>
+    <div class="sources-grid">
+      <span class="src" title="Primary research papers">arXiv</span>
+      <span class="src" title="Code repositories">GitHub</span>
+      <span class="src" title="Practitioner discussion">Hacker News</span>
+      <span class="src" title="Technical Q&amp;A">Stack Overflow</span>
+      <span class="src" title="Biomedical research">PubMed</span>
+      <span class="src" title="Practitioner writing">Blogs</span>
+      <span class="src" title="Computing discussion">Lobsters</span>
+      <span class="src" title="Internet standards">RFCs</span>
+    </div>
+  </div>
+
+  <div id="about" class="about-section hide">
+    <h2>What is THE HOLE?</h2>
+    <p>A practitioner-first search engine that finds things people actually built.
+    No ads. No tracking. No cookies. No SEO slop.</p>
+
+    <h2>What is BLOOM?</h2>
+    <p>BLOOM is THE HOLE's browser -- a desktop browser where the search engine
+    is not a feature but the foundation. Every page you visit is analyzed by the
+    <strong>slop shield</strong>: affiliate links are dimmed, low-quality content is
+    flagged, and source tiers are shown for known domains. Reader mode strips
+    pages to clean text with metadata. The address bar <em>is</em> the search bar.</p>
+
+    <h2>How it works</h2>
+    <p>THE HOLE crawls primary sources &mdash; arXiv, GitHub, Hacker News, Stack Overflow,
+    PubMed, practitioner blogs, Lobsters, and IETF RFCs. Every document passes through
+    a <strong>slop filter</strong> that detects listicles, affiliate spam, keyword stuffing,
+    and LLM-generated content. Surviving documents are scored by a transparent ranking
+    algorithm that rewards real practitioners who build real things.</p>
+
+    <h2>Ranking is public</h2>
+    <p>The ranking algorithm is <a href="https://github.com/teslasolar/thehole">fully open source</a>.
+    If knowing the algorithm lets you game it, the algorithm is bad.
+    THE HOLE resists gaming because the optimal strategy is: write real content about
+    things you actually built. The game theory <em>is</em> the alignment.</p>
+
+    <h2>Source tiers</h2>
+    <p><span class="result-tier t1">T1</span> Primary sources &mdash; arXiv, GitHub, PubMed, RFCs<br>
+    <span class="result-tier t2">T2</span> Practitioner sources &mdash; HN, SO, Lobsters, quality blogs<br>
+    <span class="result-tier t3">T3</span> Journalism &mdash; vetted tech reporting<br>
+    <span class="result-tier t4">T4</span> Other &mdash; lower confidence, deprioritized</p>
+
+    <h2>Shortcuts</h2>
+    <p>In the BLOOM address bar:<br>
+    <code>:gh query</code> &mdash; search GitHub<br>
+    <code>:arxiv query</code> &mdash; search arXiv<br>
+    <code>:hn query</code> &mdash; search Hacker News<br>
+    <code>:so query</code> &mdash; search Stack Overflow<br>
+    <code>! query</code> &mdash; Google fallback</p>
+  </div>
+
+  <div class="shortcuts" id="shortcuts">
+    <kbd>/</kbd> focus search &nbsp;&middot;&nbsp;
+    <kbd>Ctrl+H</kbd> home &nbsp;&middot;&nbsp;
+    <kbd>Ctrl+R</kbd> reader mode &nbsp;&middot;&nbsp;
+    <kbd>Ctrl+,</kbd> settings
+  </div>
+
+  <div class="footer">
+    <a href="https://github.com/teslasolar/thehole">source</a> &middot;
+    <a href="#" onclick="toggleAbout(event)">about</a> &middot;
+    <a href="hole://settings" id="settings-link" onclick="openSettings(event)">settings</a> &middot;
+    no ads &middot; no tracking &middot; no cookies &middot; open source
+  </div>
+</div>
+
+<!-- === RESULTS VIEW === -->
+<div id="results-view" class="hide">
+  <div class="results-header">
+    <a class="logo-sm" href="#" onclick="goHome(event)">&#x1F573;&#xFE0F; THE HOLE</a>
+    <div class="search-box">
+      <input id="q2" type="text" placeholder="what are you building?"
+             aria-label="Search query">
+      <button onclick="drill()" aria-label="Search">DRILL</button>
+    </div>
+  </div>
+
+  <div class="filters" id="filters">
+    <button class="active" data-filter="all">All</button>
+    <button data-filter="t1">T1</button>
+    <button data-filter="t2">T2</button>
+    <button data-filter="code">Code</button>
+    <button data-filter="papers">Papers</button>
+    <button data-filter="month">Last month</button>
+    <button data-filter="year">Last year</button>
+    <button data-filter="ever">Ever</button>
+  </div>
+
+  <div id="stats" class="stats"></div>
+  <div id="results"></div>
+  <div id="pagination" class="pagination hide"></div>
+
+  <div class="footer">
+    <a href="https://github.com/teslasolar/thehole">source</a> &middot;
+    <a href="#" onclick="goHome(event)">home</a> &middot;
+    no ads &middot; no tracking &middot; no cookies
+  </div>
+</div>
+
+<script src="lunr.min.js"></script>
+<script src="search.js"></script>
+</body>
+</html>

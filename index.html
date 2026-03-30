@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>THE HOLE — download the browser that searches for things people built</title>
+<meta name="description" content="Download BLOOM, the browser that IS the search engine. 4MB. No ads. No tracking. No Chrome.">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:system-ui,-apple-system,sans-serif;background:#fafaf8;color:#1a1a1a;min-height:100vh}
+a{color:#1a1a1a}
+
+/* ═══ LAYOUT ═══ */
+.container{max-width:800px;margin:0 auto;padding:20px}
+
+/* ═══ HERO ═══ */
+.hero{text-align:center;padding:60px 0 40px}
+.hero .icon{font-size:64px;margin-bottom:8px}
+.hero h1{font-size:36px;font-weight:800;letter-spacing:1px}
+.hero .tagline{color:#666;font-size:16px;margin-top:8px}
+.hero .sub{color:#999;font-size:13px;margin-top:4px;font-style:italic}
+
+/* ═══ NAV ═══ */
+.nav{display:flex;justify-content:center;gap:20px;margin:20px 0 40px;font-size:13px}
+.nav a{color:#666;text-decoration:none;padding:4px 0;border-bottom:1px solid transparent}
+.nav a:hover{color:#1a1a1a;border-bottom-color:#1a1a1a}
+.nav a.active{color:#1a1a1a;border-bottom-color:#1a1a1a;font-weight:600}
+
+/* ═══ DOWNLOADS ═══ */
+.downloads{margin:0 0 50px}
+.downloads h2{font-size:20px;font-weight:700;margin-bottom:20px;padding-bottom:8px;border-bottom:2px solid #1a1a1a}
+.platform{margin-bottom:24px;padding:16px;border:1px solid #e0e0e0;border-radius:4px;background:#fff}
+.platform-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;flex-wrap:wrap;gap:8px}
+.platform-name{font-size:16px;font-weight:700}
+.platform-arch{font-size:11px;color:#999;font-weight:normal}
+.platform-meta{font-size:12px;color:#888}
+.dl-links{display:flex;gap:8px;flex-wrap:wrap}
+.dl-btn{display:inline-block;padding:8px 18px;background:#1a1a1a;color:#fafaf8;text-decoration:none;border-radius:4px;font-size:13px;font-weight:600;transition:background .15s}
+.dl-btn:hover{background:#333;color:#fafaf8}
+.dl-btn.secondary{background:none;color:#1a1a1a;border:1px solid #ccc}
+.dl-btn.secondary:hover{border-color:#1a1a1a}
+.dl-size{font-size:11px;color:#999;margin-left:4px}
+
+/* ═══ STATS ═══ */
+.stats-bar{display:flex;justify-content:center;gap:32px;margin:30px 0;padding:16px 0;border-top:1px solid #eee;border-bottom:1px solid #eee}
+.stat{text-align:center}
+.stat-val{font-size:24px;font-weight:800}
+.stat-label{font-size:11px;color:#888;margin-top:2px}
+
+/* ═══ COMPARISON ═══ */
+.compare{margin:40px 0}
+.compare h2{font-size:20px;font-weight:700;margin-bottom:16px;padding-bottom:8px;border-bottom:2px solid #1a1a1a}
+.compare-table{width:100%;border-collapse:collapse;font-size:13px}
+.compare-table th{text-align:left;padding:8px 12px;border-bottom:2px solid #1a1a1a;font-weight:700}
+.compare-table td{padding:8px 12px;border-bottom:1px solid #eee}
+.compare-table tr:last-child td{border-bottom:none}
+.compare-table .win{color:#155724;font-weight:600}
+.compare-table .lose{color:#999}
+
+/* ═══ FEATURES ═══ */
+.features{margin:40px 0}
+.features h2{font-size:20px;font-weight:700;margin-bottom:16px;padding-bottom:8px;border-bottom:2px solid #1a1a1a}
+.feature-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.feature{padding:14px;border:1px solid #e0e0e0;border-radius:4px;background:#fff}
+.feature h3{font-size:14px;font-weight:700;margin-bottom:4px}
+.feature p{font-size:12px;color:#555;line-height:1.5}
+
+/* ═══ BUILD FROM SOURCE ═══ */
+.source{margin:40px 0}
+.source h2{font-size:20px;font-weight:700;margin-bottom:16px;padding-bottom:8px;border-bottom:2px solid #1a1a1a}
+.source pre{background:#1a1a1a;color:#e0e0e0;padding:16px;border-radius:4px;overflow-x:auto;font-size:13px;line-height:1.6}
+.source code{font-family:'SF Mono',Monaco,'Cascadia Code',monospace}
+.source .comment{color:#6a9955}
+
+/* ═══ SEARCH ENGINE ═══ */
+.search-section{margin:40px 0;text-align:center}
+.search-section h2{font-size:20px;font-weight:700;margin-bottom:12px}
+.search-section p{font-size:13px;color:#666;margin-bottom:16px}
+.try-btn{display:inline-block;padding:12px 32px;background:#1a1a1a;color:#fafaf8;text-decoration:none;border-radius:4px;font-size:15px;font-weight:700}
+.try-btn:hover{background:#333;color:#fafaf8}
+
+/* ═══ FOOTER ═══ */
+.footer{text-align:center;padding:30px 0;margin-top:40px;border-top:1px solid #eee;font-size:11px;color:#ccc}
+.footer a{color:#bbb;text-decoration:none}
+.footer a:hover{color:#888}
+
+/* ═══ RESPONSIVE ═══ */
+@media(max-width:600px){
+  .hero{padding:30px 0 20px}
+  .hero h1{font-size:26px}
+  .feature-grid{grid-template-columns:1fr}
+  .stats-bar{flex-wrap:wrap;gap:16px}
+  .compare-table{font-size:12px}
+  .compare-table th,.compare-table td{padding:6px 8px}
+  .platform-header{flex-direction:column;align-items:flex-start}
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+
+  <!-- ═══ HERO ═══ -->
+  <div class="hero">
+    <div class="icon">&#x1F573;&#xFE0F;</div>
+    <h1>THE HOLE</h1>
+    <div class="tagline">search for things people built</div>
+    <div class="sub">a browser + search engine &middot; no ads &middot; no tracking &middot; open source</div>
+  </div>
+
+  <!-- ═══ NAV ═══ -->
+  <div class="nav">
+    <a href="#downloads" class="active">Downloads</a>
+    <a href="#features">Features</a>
+    <a href="#compare">Compare</a>
+    <a href="#source">Build</a>
+    <a href="frontend/index.html">Try Search</a>
+    <a href="donations/">Fund THE HOLE</a>
+    <a href="https://github.com/teslasolar/thehole">GitHub</a>
+  </div>
+
+  <!-- ═══ STATS ═══ -->
+  <div class="stats-bar">
+    <div class="stat"><div class="stat-val">~4MB</div><div class="stat-label">installer size</div></div>
+    <div class="stat"><div class="stat-val">~30MB</div><div class="stat-label">RAM idle</div></div>
+    <div class="stat"><div class="stat-val">0</div><div class="stat-label">trackers</div></div>
+    <div class="stat"><div class="stat-val">0</div><div class="stat-label">ads</div></div>
+    <div class="stat"><div class="stat-val">6</div><div class="stat-label">platforms</div></div>
+  </div>
+
+  <!-- ═══ DOWNLOADS ═══ -->
+  <div class="downloads" id="downloads">
+    <h2>Download BLOOM</h2>
+
+    <div id="no-release-banner" class="note" style="display:none;background:#fff8e1;border-left:3px solid #f9a825;padding:12px 16px;margin-bottom:20px;font-size:13px;color:#555;border-radius:0 4px 4px 0">
+      Binaries not uploaded yet &mdash; CI is building them now.
+      Meanwhile, <a href="#source">build from source</a> or grab CI artifacts from
+      <a href="https://github.com/teslasolar/TheHole/actions">GitHub Actions</a>.
+    </div>
+
+    <div class="platform" id="platform-detect" style="display:none;border:2px solid #1a1a1a">
+      <div class="platform-header">
+        <div><span class="platform-name" id="detect-name">Your platform</span> <span class="platform-arch" id="detect-arch"></span></div>
+        <div class="platform-meta">Detected automatically</div>
+      </div>
+      <div class="dl-links" id="detect-links"></div>
+    </div>
+
+    <div class="platform">
+      <div class="platform-header">
+        <div><span class="platform-name">Linux</span> <span class="platform-arch">x86_64</span></div>
+        <div class="platform-meta">WebKitGTK &middot; system webview</div>
+      </div>
+      <div class="dl-links">
+        <a class="dl-btn" href="https://github.com/teslasolar/TheHole/releases/latest/download/THE%20HOLE%20BROWSER_0.1.3_amd64.deb">.deb</a>
+        <a class="dl-btn secondary" href="https://github.com/teslasolar/TheHole/releases/latest/download/THE%20HOLE%20BROWSER_0.1.3_amd64.AppImage">.AppImage</a>
+        <a class="dl-btn secondary" href="https://github.com/teslasolar/TheHole/releases/latest/download/THE%20HOLE%20BROWSER-0.1.3-1.x86_64.rpm">.rpm</a>
+      </div>
+    </div>
+
+    <div class="platform">
+      <div class="platform-header">
+        <div><span class="platform-name">macOS</span> <span class="platform-arch">Apple Silicon (ARM64)</span></div>
+        <div class="platform-meta">WebKit &middot; system webview</div>
+      </div>
+      <div class="dl-links">
+        <a class="dl-btn" href="https://github.com/teslasolar/TheHole/releases/latest/download/THE%20HOLE%20BROWSER_0.1.3_aarch64.dmg">.dmg</a>
+      </div>
+    </div>
+
+    <div class="platform">
+      <div class="platform-header">
+        <div><span class="platform-name">macOS</span> <span class="platform-arch">Intel (x86_64)</span></div>
+        <div class="platform-meta">WebKit &middot; system webview</div>
+      </div>
+      <div class="dl-links">
+        <a class="dl-btn" href="https://github.com/teslasolar/TheHole/releases/latest/download/THE%20HOLE%20BROWSER_0.1.3_x64.dmg">.dmg</a>
+      </div>
+    </div>
+
+    <div class="platform">
+      <div class="platform-header">
+        <div><span class="platform-name">Windows</span> <span class="platform-arch">x86_64</span></div>
+        <div class="platform-meta">WebView2 &middot; system webview</div>
+      </div>
+      <div class="dl-links">
+        <a class="dl-btn" href="https://github.com/teslasolar/TheHole/releases/latest/download/THE%20HOLE%20BROWSER_0.1.3_x64-setup.exe">.exe installer</a>
+        <a class="dl-btn secondary" href="https://github.com/teslasolar/TheHole/releases/latest/download/THE%20HOLE%20BROWSER_0.1.3_x64_en-US.msi">.msi</a>
+      </div>
+    </div>
+
+    <div class="platform">
+      <div class="platform-header">
+        <div><span class="platform-name">Android</span> <span class="platform-arch">ARM64 / ARM / x86_64</span></div>
+        <div class="platform-meta">System WebView</div>
+      </div>
+      <div class="dl-links">
+        <a class="dl-btn" href="https://github.com/teslasolar/TheHole/releases/latest/download/app-universal-release.apk">.apk</a>
+      </div>
+    </div>
+
+    <div class="platform">
+      <div class="platform-header">
+        <div><span class="platform-name">iOS</span> <span class="platform-arch">ARM64</span></div>
+        <div class="platform-meta">WKWebView &middot; coming soon</div>
+      </div>
+      <div class="dl-links">
+        <span class="dl-btn secondary" style="opacity:0.5;cursor:default">TestFlight (soon)</span>
+      </div>
+    </div>
+
+    <p style="font-size:12px;color:#999;margin-top:12px;text-align:center">
+      All downloads from <a href="https://github.com/teslasolar/TheHole/releases" style="color:#888">GitHub Releases</a>.
+      No release yet? <a href="#source" style="color:#888">Build from source</a> or grab
+      <a href="https://github.com/teslasolar/TheHole/actions" style="color:#888">CI artifacts</a>.
+    </p>
+  </div>
+
+  <!-- ═══ FEATURES ═══ -->
+  <div class="features" id="features">
+    <h2>Features</h2>
+    <div class="feature-grid">
+      <div class="feature">
+        <h3>Slop Shield</h3>
+        <p>Every page is analyzed in real-time. Tracking scripts blocked. Affiliate links dimmed. LLM-generated content flagged. You see the web without the garbage.</p>
+      </div>
+      <div class="feature">
+        <h3>Practitioner Search</h3>
+        <p>THE HOLE indexes arXiv, GitHub, HN, Stack Overflow, PubMed, practitioner blogs, Lobsters, and RFCs. Results ranked by who actually builds things.</p>
+      </div>
+      <div class="feature">
+        <h3>Reader Mode</h3>
+        <p>Ctrl+R strips any page to clean text. System serif font, centered, no clutter. Code blocks preserved. Affiliate links removed.</p>
+      </div>
+      <div class="feature">
+        <h3>Source Shortcuts</h3>
+        <p>Type <code>:gh rust parser</code> for GitHub, <code>:arxiv transformers</code> for arXiv, <code>:hn distributed</code> for HN, <code>:so python async</code> for Stack Overflow.</p>
+      </div>
+      <div class="feature">
+        <h3>Local-Only Data</h3>
+        <p>Bookmarks, history, and settings stored in SQLite on your machine. No cloud sync. No account. No telemetry. The browser forgets you exist when you close it.</p>
+      </div>
+      <div class="feature">
+        <h3>Transparent Algorithm</h3>
+        <p>The ranking algorithm is fully public. If knowing it lets you game it, the algorithm is bad. The optimal strategy is: write real content about things you built.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ COMPARISON ═══ -->
+  <div class="compare" id="compare">
+    <h2>How it compares</h2>
+    <table class="compare-table">
+      <thead>
+        <tr><th></th><th>BLOOM</th><th>Chrome</th><th>Firefox</th><th>Brave</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Install size</td>
+          <td class="win">~4 MB</td>
+          <td class="lose">~300 MB</td>
+          <td class="lose">~80 MB</td>
+          <td class="lose">~100 MB</td>
+        </tr>
+        <tr>
+          <td>RAM (idle)</td>
+          <td class="win">~30 MB</td>
+          <td class="lose">~500 MB</td>
+          <td class="lose">~400 MB</td>
+          <td class="lose">~350 MB</td>
+        </tr>
+        <tr>
+          <td>Engine</td>
+          <td class="win">System WebView</td>
+          <td class="lose">Ships Chromium</td>
+          <td>Gecko</td>
+          <td class="lose">Ships Chromium</td>
+        </tr>
+        <tr>
+          <td>Tracking</td>
+          <td class="win">None</td>
+          <td class="lose">Extensive</td>
+          <td class="lose">Telemetry</td>
+          <td class="lose">Some</td>
+        </tr>
+        <tr>
+          <td>Ads</td>
+          <td class="win">None</td>
+          <td class="lose">Ad business</td>
+          <td class="win">None</td>
+          <td class="lose">Own ad network</td>
+        </tr>
+        <tr>
+          <td>Default search</td>
+          <td class="win">THE HOLE</td>
+          <td class="lose">Google</td>
+          <td class="lose">Google</td>
+          <td>Brave Search</td>
+        </tr>
+        <tr>
+          <td>Slop filter</td>
+          <td class="win">Built-in</td>
+          <td class="lose">No</td>
+          <td class="lose">No</td>
+          <td class="lose">No</td>
+        </tr>
+        <tr>
+          <td>Open source</td>
+          <td class="win">MIT</td>
+          <td class="lose">Proprietary</td>
+          <td>MPL</td>
+          <td>MPL</td>
+        </tr>
+        <tr>
+          <td>Account required</td>
+          <td class="win">No</td>
+          <td class="lose">Pushed</td>
+          <td class="lose">Pushed</td>
+          <td class="lose">Pushed</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- ═══ BUILD FROM SOURCE ═══ -->
+  <div class="source" id="source">
+    <h2>Build from source</h2>
+    <pre><code><span class="comment"># Clone</span>
+git clone https://github.com/teslasolar/TheHole.git
+cd TheHole
+
+<span class="comment"># Install Rust (if needed)</span>
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+
+<span class="comment"># Install Tauri CLI</span>
+cargo install tauri-cli --version "^2" --locked
+
+<span class="comment"># Linux: install system deps</span>
+sudo apt-get install libwebkit2gtk-4.1-dev libgtk-3-dev \
+  librsvg2-dev patchelf libsoup-3.0-dev
+
+<span class="comment"># Build</span>
+cargo tauri build
+
+<span class="comment"># Or run in dev mode with hot reload</span>
+cargo tauri dev
+
+<span class="comment"># Android</span>
+cargo tauri android build
+
+<span class="comment"># iOS</span>
+cargo tauri ios build</code></pre>
+  </div>
+
+  <!-- ═══ TRY THE SEARCH ENGINE ═══ -->
+  <div class="search-section">
+    <h2>Try the search engine</h2>
+    <p>THE HOLE search works in any browser. No download required.</p>
+    <a class="try-btn" href="frontend/index.html">Open THE HOLE Search</a>
+  </div>
+
+  <!-- ═══ FOOTER ═══ -->
+  <div class="footer">
+    <a href="https://github.com/teslasolar/TheHole">GitHub</a> &middot;
+    <a href="https://github.com/teslasolar/TheHole/releases">Releases</a> &middot;
+    <a href="pages/about.html">About</a> &middot;
+    <a href="donations/">Donate</a> &middot;
+    MIT License &middot;
+    no ads &middot; no tracking &middot; no cookies &middot; no chrome
+  </div>
+
+</div>
+
+<script>
+// Detect platform and highlight the right download
+(function(){
+  var ua = navigator.userAgent || '';
+  var p = navigator.platform || '';
+  var det = document.getElementById('platform-detect');
+  var name = document.getElementById('detect-name');
+  var arch = document.getElementById('detect-arch');
+  var links = document.getElementById('detect-links');
+  var base = 'https://github.com/teslasolar/TheHole/releases/latest/download/';
+
+  function btn(href, label, primary) {
+    return '<a class="dl-btn' + (primary ? '' : ' secondary') + '" href="' + href + '">' + label + '</a>';
+  }
+
+  if (/Android/i.test(ua)) {
+    name.textContent = 'Android';
+    arch.textContent = 'detected';
+    links.innerHTML = btn(base + 'app-universal-release.apk', 'Download .apk', true);
+  } else if (/iPhone|iPad|iPod/i.test(ua)) {
+    name.textContent = 'iOS';
+    arch.textContent = 'detected';
+    links.innerHTML = '<span class="dl-btn secondary" style="opacity:0.5;cursor:default">TestFlight (soon)</span>';
+  } else if (/Win/i.test(p)) {
+    name.textContent = 'Windows';
+    arch.textContent = 'x86_64 detected';
+    links.innerHTML = btn(base + 'THE%20HOLE%20BROWSER_0.1.3_x64-setup.exe', 'Download .exe', true) +
+      btn(base + 'THE%20HOLE%20BROWSER_0.1.3_x64_en-US.msi', '.msi', false);
+  } else if (/Mac/i.test(p)) {
+    var isArm = /arm|aarch/i.test(ua) || (navigator.userAgentData && navigator.userAgentData.architecture === 'arm');
+    if (isArm || /Apple\s?M/i.test(ua) || !(/Intel/i.test(ua))) {
+      name.textContent = 'macOS';
+      arch.textContent = 'Apple Silicon detected';
+      links.innerHTML = btn(base + 'THE%20HOLE%20BROWSER_0.1.3_aarch64.dmg', 'Download .dmg', true);
+    } else {
+      name.textContent = 'macOS';
+      arch.textContent = 'Intel detected';
+      links.innerHTML = btn(base + 'THE%20HOLE%20BROWSER_0.1.3_x64.dmg', 'Download .dmg', true);
+    }
+  } else if (/Linux/i.test(p)) {
+    name.textContent = 'Linux';
+    arch.textContent = 'x86_64 detected';
+    links.innerHTML = btn(base + 'THE%20HOLE%20BROWSER_0.1.3_amd64.deb', 'Download .deb', true) +
+      btn(base + 'THE%20HOLE%20BROWSER_0.1.3_amd64.AppImage', '.AppImage', false) +
+      btn(base + 'THE%20HOLE%20BROWSER-0.1.3-1.x86_64.rpm', '.rpm', false);
+  }
+
+  if (links.innerHTML) det.style.display = '';
+
+  // Check if release has assets via GitHub API (CORS-friendly)
+  fetch('https://api.github.com/repos/teslasolar/TheHole/releases/tags/v0.1.3')
+    .then(function(r) { return r.json(); })
+    .then(function(data) {
+      if (!data.assets || data.assets.length === 0) {
+        document.getElementById('no-release-banner').style.display = '';
+      }
+    })
+    .catch(function() {
+      document.getElementById('no-release-banner').style.display = '';
+    });
+})();
+</script>
+</body>
+</html>

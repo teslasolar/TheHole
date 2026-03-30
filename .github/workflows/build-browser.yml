@@ -1,0 +1,60 @@
+name: Build BLOOM Browser
+
+on:
+  push:
+    branches: [main, claude/search-engine-frontend-A6FXd]
+    tags: ["v*"]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  linux:
+    uses: ./.github/workflows/build-linux.yml
+
+  macos:
+    uses: ./.github/workflows/build-macos.yml
+
+  windows:
+    uses: ./.github/workflows/build-windows.yml
+
+  android:
+    uses: ./.github/workflows/build-android.yml
+
+  ios:
+    uses: ./.github/workflows/build-ios.yml
+
+  # ---------------------------------------------------------------------------
+  # Create GitHub release (tags only)
+  # ---------------------------------------------------------------------------
+  create-release:
+    if: startsWith(github.ref, 'refs/tags/v')
+    needs: [linux, macos, windows]
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Download all artifacts
+        uses: actions/download-artifact@v4
+        with:
+          path: artifacts
+
+      - name: List artifacts
+        run: find artifacts -type f | head -50
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          draft: false
+          prerelease: false
+          generate_release_notes: true
+          files: |
+            artifacts/**/*.deb
+            artifacts/**/*.AppImage
+            artifacts/**/*.rpm
+            artifacts/**/*.dmg
+            artifacts/**/*.msi
+            artifacts/**/*.exe
+            artifacts/**/*.apk
+            artifacts/**/*.ipa

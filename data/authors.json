@@ -1,0 +1,17 @@
+{
+  "_schema": {
+    "version": 1,
+    "fields": {
+      "id": "Unique author identifier (slug)",
+      "name": "Display name",
+      "aliases": "Alternative names or handles",
+      "urls": "Known profile URLs",
+      "sources": "Sources where this author has been seen",
+      "doc_count": "Number of indexed documents by this author",
+      "first_seen": "ISO-8601 date when first indexed",
+      "last_seen": "ISO-8601 date of most recent document",
+      "tags": "Topic tags associated with this author"
+    }
+  },
+  "authors": {}
+}

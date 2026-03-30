@@ -1,0 +1,80 @@
+{
+  "project": "THE HOLE",
+  "tagline": "send money for make the hole",
+
+  "accounts": {
+    "venmo": {
+      "enabled": true,
+      "username": "@Thomas-Frumkin",
+      "url": "https://venmo.com/u/Thomas-Frumkin",
+      "label": "Venmo",
+      "color": "#008CFF",
+      "text_color": "#ffffff"
+    },
+    "github_sponsors": {
+      "enabled": false,
+      "username": "teslasolar",
+      "url": "https://github.com/sponsors/teslasolar",
+      "label": "GitHub Sponsors",
+      "color": "#1a1a1a",
+      "text_color": "#fafaf8"
+    },
+    "kofi": {
+      "enabled": true,
+      "username": "thomasfrumkinteslasolar",
+      "url": "https://ko-fi.com/thomasfrumkinteslasolar",
+      "label": "Ko-fi",
+      "color": "#FF5E5B",
+      "text_color": "#ffffff"
+    },
+    "buymeacoffee": {
+      "enabled": false,
+      "username": "",
+      "url": "https://buymeacoffee.com/",
+      "label": "Buy Me a Coffee",
+      "color": "#FFDD00",
+      "text_color": "#1a1a1a"
+    },
+    "paypal": {
+      "enabled": false,
+      "username": "",
+      "url": "https://paypal.me/",
+      "label": "PayPal",
+      "color": "#003087",
+      "text_color": "#ffffff"
+    },
+    "crypto_btc": {
+      "enabled": false,
+      "address": "",
+      "label": "Bitcoin",
+      "color": "#f7931a",
+      "text_color": "#ffffff"
+    },
+    "crypto_eth": {
+      "enabled": false,
+      "address": "",
+      "label": "Ethereum",
+      "color": "#627eea",
+      "text_color": "#ffffff"
+    }
+  },
+
+  "costs": [
+    { "label": "Domain", "amount": "$12/yr" },
+    { "label": "MeiliSearch VPS (v2 index server)", "amount": "$5-20/mo" },
+    { "label": "GitHub Pages hosting", "amount": "$0" },
+    { "label": "Apple Developer Program (iOS)", "amount": "$99/yr" },
+    { "label": "CI build minutes", "amount": "$0" },
+    { "label": "Coffee for the builder", "amount": "varies" }
+  ],
+
+  "monthly_burn": "$20-50",
+
+  "promises": [
+    "No ads, ever. Donations fund THE HOLE. Not advertisers.",
+    "No investor money. No one gets to tell THE HOLE what to index.",
+    "Stays open source. MIT license. Fork it if I get hit by a bus.",
+    "Transparent spending. Costs posted publicly if people ask.",
+    "No premium tier. Everyone gets the same HOLE."
+  ]
+}

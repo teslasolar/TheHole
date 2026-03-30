@@ -1,0 +1,31 @@
+{
+  "url": "https://jvns.ca/blog/2024/debugging-dns-queries",
+  "title": "Debugging DNS queries with strace and tcpdump",
+  "author": "Julia Evans",
+  "author_id": "jvns",
+  "source": "personal_blog",
+  "source_tier": 1,
+  "date": "2024-11-15T10:00:00Z",
+  "snippet": "Last week I was debugging a weird DNS issue where some queries were timing out. I used strace to trace the system calls and tcpdump to capture the actual packets on the wire. Here is what I found and how I fixed it.",
+  "body": "Last week I was debugging a weird DNS issue where some queries were timing out. I used strace to trace the system calls and tcpdump to capture the actual packets on the wire. Here is what I found and how I fixed it.\n\nFirst, I ran strace on the process:\n\n```\nstrace -e trace=network -p 12345\n```\n\nThis showed me that the process was making DNS queries to 8.8.8.8 but the responses were being dropped. Looking at tcpdump output:\n\n```\ntcpdump -i eth0 port 53\n```\n\nI could see the queries going out but responses coming back with the truncation bit set. The issue was that our firewall was blocking TCP DNS fallback. The fix was straightforward: allow TCP port 53 through the firewall.\n\nHere is the iptables rule I added:\n\n```\niptables -A INPUT -p tcp --dport 53 -j ACCEPT\n```\n\nAfter that, everything worked. The root cause was that our DNSSEC responses were too large for UDP (over 512 bytes) and needed TCP fallback.\n\nReferences:\n- RFC 5966: DNS Transport over TCP\n- https://www.isc.org/docs/dns-troubleshooting.pdf",
+  "body_hash": "a1b2c3d4e5f6",
+  "word_count": 180,
+  "tags": ["dns", "debugging", "linux", "networking"],
+  "lang": "en",
+  "has_code": true,
+  "has_citations": true,
+  "has_data": false,
+  "outlinks": [
+    "https://www.rfc-editor.org/rfc/rfc5966",
+    "https://www.isc.org/docs/dns-troubleshooting.pdf"
+  ],
+  "author_meta": {
+    "github_repos": 45,
+    "github_commits": 1200,
+    "papers": 0
+  },
+  "inlinks": {
+    "tier1": 3,
+    "tier2": 8
+  }
+}

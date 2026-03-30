@@ -1,0 +1,6 @@
+src-tauri/target/
+target/
+spiders/__pycache__/
+__pycache__/
+data/cursors/
+frontend/index/*.json

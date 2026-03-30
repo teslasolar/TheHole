@@ -1,0 +1,162 @@
+! THE HOLE BROWSER - Bundled Ad/Tracker Blocklist
+! Format: EasyList-compatible domain blocks
+! Last updated: 2026-03-29
+
+! ── Google Ads & Analytics ──
+||doubleclick.net^
+||googlesyndication.com^
+||google-analytics.com^
+||googleadservices.com^
+||googletagmanager.com^
+||googletagservices.com^
+||pagead2.googlesyndication.com^
+||adservice.google.com^
+||www-googletagmanager.com^
+||ssl.google-analytics.com^
+||partnerad.l.doubleclick.net^
+||video-ad-stats.googlesyndication.com^
+
+! ── Facebook / Meta tracking ──
+||facebook.net^
+||connect.facebook.net^
+||pixel.facebook.com^
+||an.facebook.com^
+||graph.facebook.com^
+||www.facebook.com/tr^
+
+! ── Twitter / X ads ──
+||ads-twitter.com^
+||analytics.twitter.com^
+||static.ads-twitter.com^
+||t.co^
+
+! ── Microsoft / Bing ──
+||bat.bing.com^
+||clarity.ms^
+||c.bing.com^
+||c2.bing.com^
+
+! ── Amazon ads ──
+||aax.amazon-adsystem.com^
+||z-na.amazon-adsystem.com^
+||fls-na.amazon-adsystem.com^
+||amazon-adsystem.com^
+||aan.amazon.com^
+||assoc-amazon.com^
+
+! ── LinkedIn ──
+||snap.licdn.com^
+||px.ads.linkedin.com^
+||analytics.linkedin.com^
+
+! ── TikTok ──
+||analytics.tiktok.com^
+||ads-api.tiktok.com^
+||log.byteoversea.com^
+||mon.musical.ly^
+
+! ── Hotjar / Session Recording ──
+||hotjar.com^
+||static.hotjar.com^
+||script.hotjar.com^
+||vars.hotjar.com^
+
+! ── Mixpanel / Amplitude / Segment ──
+||mixpanel.com^
+||cdn.mxpnl.com^
+||api.mixpanel.com^
+||amplitude.com^
+||api.amplitude.com^
+||cdn.amplitude.com^
+||segment.io^
+||api.segment.io^
+||cdn.segment.com^
+
+! ── Other analytics ──
+||newrelic.com^
+||nr-data.net^
+||bam.nr-data.net^
+||js-agent.newrelic.com^
+||heap.io^
+||heapanalytics.com^
+||kissmetrics.com^
+||quantserve.com^
+||scorecardresearch.com^
+||sb.scorecardresearch.com^
+||b.scorecardresearch.com^
+||comscore.com^
+
+! ── Common ad networks ──
+||adnxs.com^
+||adsrvr.org^
+||adzerk.net^
+||advertising.com^
+||adform.net^
+||openx.net^
+||pubmatic.com^
+||rubiconproject.com^
+||casalemedia.com^
+||contextweb.com^
+||criteo.com^
+||criteo.net^
+||bidswitch.net^
+||turn.com^
+||taboola.com^
+||outbrain.com^
+||revcontent.com^
+||mgid.com^
+||zergnet.com^
+||sharethrough.com^
+||teads.tv^
+||yieldmo.com^
+
+! ── Affiliate networks ──
+||shareasale.com^
+||commission-junction.com^
+||awin1.com^
+||clickbank.net^
+||linksynergy.com^
+||jdoqocy.com^
+||tkqlhce.com^
+||anrdoezrs.net^
+||dpbolvw.net^
+||kqzyfj.com^
+||ftjcfx.com^
+
+! ── URL shorteners used for tracking ──
+||bit.ly^
+||goo.gl^
+||tinyurl.com^
+||ow.ly^
+||t.ly^
+
+! ── Other trackers ──
+||moatads.com^
+||sentry-cdn.com^
+||bugsnag.com^
+||fullstory.com^
+||demdex.net^
+||omtrdc.net^
+||2o7.net^
+||bluekai.com^
+||krxd.net^
+||exelator.com^
+||doubleverify.com^
+||rlcdn.com^
+||tapad.com^
+||brealtime.com^
+||eyeota.net^
+||mathtag.com^
+||adroll.com^
+||bounceexchange.com^
+||pushwoosh.com^
+||onesignal.com^
+||pusher.com^
+||urbanairship.com^
+||leanplum.com^
+||branch.io^
+||app.link^
+||appsflyer.com^
+||adjust.com^
+||kochava.com^
+||mparticle.com^

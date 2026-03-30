@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>THE HOLE -- Settings</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{
+  font-family:system-ui,-apple-system,sans-serif;
+  background:#fafaf8;color:#1a1a1a;
+  max-width:700px;margin:0 auto;padding:20px;
+  min-height:100vh;
+}
+
+/* === HEADER === */
+.header{display:flex;align-items:center;gap:12px;margin-bottom:24px;padding-bottom:12px;border-bottom:2px solid #1a1a1a}
+.header .logo-sm{font-size:20px;cursor:pointer;text-decoration:none;white-space:nowrap;font-weight:800;color:#1a1a1a}
+.header h1{font-size:18px;font-weight:800;letter-spacing:1px;text-transform:uppercase}
+
+/* === SECTIONS === */
+.section{margin-bottom:32px}
+.section h2{
+  font-size:14px;font-weight:800;text-transform:uppercase;
+  letter-spacing:1px;color:#1a1a1a;
+  margin-bottom:12px;padding-bottom:6px;border-bottom:1px solid #eee;
+}
+.section p.desc{font-size:12px;color:#888;margin-bottom:12px;line-height:1.5}
+
+/* === FORM CONTROLS === */
+.control{display:flex;align-items:center;gap:12px;margin-bottom:12px}
+.control label{font-size:13px;font-weight:600;min-width:140px;color:#333}
+.control input[type="range"]{flex:1;max-width:200px}
+.control input[type="number"]{width:60px;padding:4px 8px;border:1px solid #ddd;border-radius:3px;font-size:13px}
+.control select{padding:4px 8px;border:1px solid #ddd;border-radius:3px;font-size:13px;background:#fff}
+.control .value{font-size:12px;color:#888;min-width:40px}
+
+/* === TOGGLE SWITCH === */
+.toggle{position:relative;display:inline-block;width:40px;height:22px}
+.toggle input{opacity:0;width:0;height:0}
+.toggle .slider{
+  position:absolute;cursor:pointer;top:0;left:0;right:0;bottom:0;
+  background:#ccc;border-radius:22px;transition:.2s;
+}
+.toggle .slider:before{
+  content:"";position:absolute;height:16px;width:16px;left:3px;bottom:3px;
+  background:#fff;border-radius:50%;transition:.2s;
+}
+.toggle input:checked + .slider{background:#1a1a1a}
+.toggle input:checked + .slider:before{transform:translateX(18px)}
+
+/* === LIST === */
+.list{border:1px solid #eee;border-radius:4px;max-height:240px;overflow-y:auto;margin-bottom:8px}
+.list-empty{padding:16px;text-align:center;color:#bbb;font-size:12px}
+.list-item{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:8px 12px;border-bottom:1px solid #f5f5f5;font-size:13px;
+}
+.list-item:last-child{border-bottom:none}
+.list-item .domain{font-weight:600;color:#1a1a1a}
+.list-item .score{font-size:12px;color:#888}
+.list-item .date{font-size:11px;color:#bbb}
+.list-item button{
+  background:none;border:1px solid #ddd;border-radius:3px;
+  padding:2px 8px;font-size:11px;cursor:pointer;color:#999;
+}
+.list-item button:hover{border-color:#c0392b;color:#c0392b}
+
+/* === ADD ROW === */
+.add-row{display:flex;gap:6px;margin-bottom:8px}
+.add-row input{
+  flex:1;padding:6px 10px;font-size:13px;
+  border:1px solid #ddd;border-radius:3px;outline:none;
+}
+.add-row input:focus{border-color:#555}
+.add-row button{
+  padding:6px 14px;background:#1a1a1a;color:#fafaf8;
+  border:none;border-radius:3px;font-size:12px;
+  cursor:pointer;font-weight:700;white-space:nowrap;
+}
+.add-row button:hover{background:#333}
+
+/* === ACTION BUTTONS === */
+.actions{margin-top:8px}
+.actions button{
+  padding:6px 14px;border:1px solid #ddd;border-radius:3px;
+  background:#fff;font-size:12px;cursor:pointer;color:#555;
+  margin-right:6px;
+}
+.actions button:hover{border-color:#999;color:#1a1a1a}
+.actions button.danger{border-color:#f5c6cb;color:#721c24}
+.actions button.danger:hover{background:#f8d7da;border-color:#c0392b}
+
+/* === STATUS === */
+.status{font-size:11px;color:#28a745;margin-top:6px;min-height:16px}
+
+/* === FOOTER === */
+.footer{text-align:center;margin-top:40px;padding-top:20px;border-top:1px solid #eee;font-size:11px;color:#ccc}
+.footer a{color:#bbb;text-decoration:none}
+.footer a:hover{color:#888}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <a class="logo-sm" href="index.html" onclick="goHome(event)">&#x1F573;&#xFE0F; THE HOLE</a>
+  <h1>Settings</h1>
+</div>
+
+<!-- === SLOP SHIELD === -->
+<div class="section" id="section-slop">
+  <h2>Slop Shield</h2>
+  <p class="desc">The slop shield analyzes every page you visit and flags low-quality or generated content. Affiliate links are dimmed automatically.</p>
+
+  <div class="control">
+    <label for="slop-enabled">Enabled</label>
+    <label class="toggle">
+      <input type="checkbox" id="slop-enabled" checked>
+      <span class="slider"></span>
+    </label>
+  </div>
+
+  <div class="control">
+    <label for="slop-threshold">Sensitivity</label>
+    <input type="range" id="slop-threshold" min="-50" max="-10" value="-30" step="5">
+    <span class="value" id="slop-threshold-value">-30</span>
+  </div>
+  <p class="desc">Warning banner threshold. Lower values (e.g. -50) mean fewer warnings. Higher values (e.g. -10) are more aggressive.</p>
+
+  <div class="status" id="slop-status"></div>
+</div>
+
+<!-- === READER MODE === -->
+<div class="section" id="section-reader">
+  <h2>Reader Mode</h2>
+  <p class="desc">Clean reading view with no distractions. Activate with Ctrl+R on any page.</p>
+
+  <div class="control">
+    <label for="reader-font-size">Font size</label>
+    <input type="number" id="reader-font-size" min="12" max="28" value="18" step="1">
+    <span class="value">px</span>
+  </div>
+
+  <div class="control">
+    <label for="reader-theme">Theme</label>
+    <select id="reader-theme">
+      <option value="light" selected>Light</option>
+      <option value="dark">Dark</option>
+    </select>
+  </div>
+
+  <div class="status" id="reader-status"></div>
+</div>
+
+<!-- === BLOCKED DOMAINS === -->
+<div class="section" id="section-blocked">
+  <h2>Blocked Domains</h2>
+  <p class="desc">Pages from blocked domains will show a full-page warning. These are in addition to the built-in blocklist.</p>
+
+  <div class="add-row">
+    <input type="text" id="blocked-input" placeholder="example.com">
+    <button onclick="addBlocked()">BLOCK</button>
+  </div>
+
+  <div class="list" id="blocked-list">
+    <div class="list-empty">No custom blocked domains.</div>
+  </div>
+
+  <div class="status" id="blocked-status"></div>
+</div>
+
+<!-- === SLOP OVERRIDES === -->
+<div class="section" id="section-overrides">
+  <h2>Slop Overrides</h2>
+  <p class="desc">Manually set slop scores for specific domains. These override the automatic analysis.</p>
+
+  <div class="add-row">
+    <input type="text" id="override-domain" placeholder="example.com">
+    <input type="number" id="override-score" placeholder="-25" min="-100" max="100" step="5" style="width:70px">
+    <button onclick="addOverride()">SET</button>
+  </div>
+
+  <div class="list" id="override-list">
+    <div class="list-empty">No slop overrides.</div>
+  </div>
+
+  <div class="status" id="override-status"></div>
+</div>
+
+<!-- === BOOKMARKS === -->
+<div class="section" id="section-bookmarks">
+  <h2>Bookmarks</h2>
+
+  <div class="list" id="bookmarks-list">
+    <div class="list-empty">No bookmarks saved.</div>
+  </div>
+
+  <div class="status" id="bookmarks-status"></div>
+</div>
+
+<!-- === HISTORY === -->
+<div class="section" id="section-history">
+  <h2>History</h2>
+
+  <div class="list" id="history-list">
+    <div class="list-empty">No browsing history.</div>
+  </div>
+
+  <div class="actions">
+    <button class="danger" onclick="clearHistory()">Clear All History</button>
+  </div>
+
+  <div class="status" id="history-status"></div>
+</div>
+
+<div class="footer">
+  <a href="index.html" onclick="goHome(event)">home</a> &middot;
+  no ads &middot; no tracking &middot; no telemetry &middot; all data stays local
+</div>
+
+<script>
+(function () {
+  'use strict';
+
+  // === TAURI IPC ===
+
+  var isTauri = false;
+  var invoke = null;
+
+  try {
+    if (window.__TAURI__ && window.__TAURI__.core && window.__TAURI__.core.invoke) {
+      invoke = window.__TAURI__.core.invoke;
+      isTauri = true;
+    } else if (window.__TAURI__ && window.__TAURI__.invoke) {
+      invoke = window.__TAURI__.invoke;
+      isTauri = true;
+    }
+  } catch (e) {}
+
+  // === LOCAL STORAGE FALLBACK ===
+  // When not in Tauri, settings are stored in localStorage.
+
+  function getSetting(key, defaultValue) {
+    if (isTauri) {
+      return invoke('get_setting', { key: key })
+        .then(function (val) {
+          return val !== null && val !== undefined ? val : defaultValue;
+        })
+        .catch(function () { return defaultValue; });
+    }
+    return Promise.resolve(function () {
+      try {
+        var val = localStorage.getItem('hole_' + key);
+        return val !== null ? JSON.parse(val) : defaultValue;
+      } catch (e) {
+        return defaultValue;
+      }
+    }());
+  }
+
+  function setSetting(key, value) {
+    if (isTauri) {
+      return invoke('set_setting', { key: key, value: JSON.stringify(value) })
+        .catch(function () {});
+    }
+    try {
+      localStorage.setItem('hole_' + key, JSON.stringify(value));
+    } catch (e) {}
+    return Promise.resolve();
+  }
+
+  function getListSetting(key) {
+    return getSetting(key, []);
+  }
+
+  function setListSetting(key, list) {
+    return setSetting(key, list);
+  }
+
+  // === SLOP SHIELD SETTINGS ===
+
+  var slopEnabled = document.getElementById('slop-enabled');
+  var slopThreshold = document.getElementById('slop-threshold');
+  var slopThresholdValue = document.getElementById('slop-threshold-value');
+  var slopStatus = document.getElementById('slop-status');
+
+  slopThreshold.addEventListener('input', function () {
+    slopThresholdValue.textContent = slopThreshold.value;
+  });
+
+  slopEnabled.addEventListener('change', function () {
+    setSetting('slop_enabled', slopEnabled.checked).then(function () {
+      showStatus(slopStatus, 'Saved.');
+    });
+  });
+
+  slopThreshold.addEventListener('change', function () {
+    setSetting('slop_threshold', parseInt(slopThreshold.value, 10)).then(function () {
+      showStatus(slopStatus, 'Saved.');
+    });
+  });
+
+  // === READER MODE SETTINGS ===
+
+  var readerFontSize = document.getElementById('reader-font-size');
+  var readerTheme = document.getElementById('reader-theme');
+  var readerStatus = document.getElementById('reader-status');
+
+  readerFontSize.addEventListener('change', function () {
+    var size = parseInt(readerFontSize.value, 10);
+    if (size >= 12 && size <= 28) {
+      setSetting('reader_font_size', size).then(function () {
+        showStatus(readerStatus, 'Saved.');
+      });
+    }
+  });
+
+  readerTheme.addEventListener('change', function () {
+    setSetting('reader_theme', readerTheme.value).then(function () {
+      showStatus(readerStatus, 'Saved.');
+    });
+  });
+
+  // === BLOCKED DOMAINS ===
+
+  var blockedInput = document.getElementById('blocked-input');
+  var blockedList = document.getElementById('blocked-list');
+  var blockedStatus = document.getElementById('blocked-status');
+
+  window.addBlocked = function () {
+    var domain = blockedInput.value.trim().toLowerCase().replace(/^https?:\/\//, '').replace(/^www\./, '').replace(/\/.*$/, '');
+    if (!domain) return;
+
+    getListSetting('blocked_domains').then(function (list) {
+      if (list.indexOf(domain) !== -1) {
+        showStatus(blockedStatus, 'Already blocked.');
+        return;
+      }
+      list.push(domain);
+      setListSetting('blocked_domains', list).then(function () {
+        blockedInput.value = '';
+        renderBlockedList(list);
+        showStatus(blockedStatus, 'Added: ' + domain);
+      });
+    });
+  };
+
+  blockedInput.addEventListener('keydown', function (e) {
+    if (e.key === 'Enter') window.addBlocked();
+  });
+
+  function removeBlocked(domain) {
+    getListSetting('blocked_domains').then(function (list) {
+      list = list.filter(function (d) { return d !== domain; });
+      setListSetting('blocked_domains', list).then(function () {
+        renderBlockedList(list);
+        showStatus(blockedStatus, 'Removed: ' + domain);
+      });
+    });
+  }
+
+  function renderBlockedList(list) {
+    if (!list || list.length === 0) {
+      blockedList.innerHTML = '<div class="list-empty">No custom blocked domains.</div>';
+      return;
+    }
+    var html = '';
+    for (var i = 0; i < list.length; i++) {
+      html += '<div class="list-item">' +
+        '<span class="domain">' + escapeHtml(list[i]) + '</span>' +
+        '<button onclick="removeBlockedItem(\'' + escapeHtml(list[i]) + '\')">remove</button>' +
+      '</div>';
+    }
+    blockedList.innerHTML = html;
+  }
+
+  window.removeBlockedItem = function (domain) { removeBlocked(domain); };
+
+  // === SLOP OVERRIDES ===
+
+  var overrideDomain = document.getElementById('override-domain');
+  var overrideScore = document.getElementById('override-score');
+  var overrideList = document.getElementById('override-list');
+  var overrideStatus = document.getElementById('override-status');
+
+  window.addOverride = function () {
+    var domain = overrideDomain.value.trim().toLowerCase().replace(/^https?:\/\//, '').replace(/^www\./, '').replace(/\/.*$/, '');
+    var score = parseInt(overrideScore.value, 10);
+    if (!domain || isNaN(score)) return;
+
+    getListSetting('slop_overrides').then(function (list) {
+      // Remove existing entry for this domain
+      list = list.filter(function (item) { return item.domain !== domain; });
+      list.push({ domain: domain, score: score });
+      setListSetting('slop_overrides', list).then(function () {
+        overrideDomain.value = '';
+        overrideScore.value = '';
+        renderOverrideList(list);
+        showStatus(overrideStatus, 'Set: ' + domain + ' = ' + score);
+      });
+    });
+  };
+
+  overrideDomain.addEventListener('keydown', function (e) {
+    if (e.key === 'Enter') window.addOverride();
+  });
+  overrideScore.addEventListener('keydown', function (e) {
+    if (e.key === 'Enter') window.addOverride();
+  });
+
+  function removeOverride(domain) {
+    getListSetting('slop_overrides').then(function (list) {
+      list = list.filter(function (item) { return item.domain !== domain; });
+      setListSetting('slop_overrides', list).then(function () {
+        renderOverrideList(list);
+        showStatus(overrideStatus, 'Removed: ' + domain);
+      });
+    });
+  }
+
+  function renderOverrideList(list) {
+    if (!list || list.length === 0) {
+      overrideList.innerHTML = '<div class="list-empty">No slop overrides.</div>';
+      return;
+    }
+    var html = '';
+    for (var i = 0; i < list.length; i++) {
+      html += '<div class="list-item">' +
+        '<span class="domain">' + escapeHtml(list[i].domain) + '</span>' +
+        '<span class="score">score: ' + list[i].score + '</span>' +
+        '<button onclick="removeOverrideItem(\'' + escapeHtml(list[i].domain) + '\')">remove</button>' +
+      '</div>';
+    }
+    overrideList.innerHTML = html;
+  }
+
+  window.removeOverrideItem = function (domain) { removeOverride(domain); };
+
+  // === BOOKMARKS ===
+
+  var bookmarksList = document.getElementById('bookmarks-list');
+  var bookmarksStatus = document.getElementById('bookmarks-status');
+
+  function removeBookmark(url) {
+    getListSetting('bookmarks').then(function (list) {
+      list = list.filter(function (item) { return item.url !== url; });
+      setListSetting('bookmarks', list).then(function () {
+        renderBookmarksList(list);
+        showStatus(bookmarksStatus, 'Bookmark removed.');
+      });
+    });
+  }
+
+  function renderBookmarksList(list) {
+    if (!list || list.length === 0) {
+      bookmarksList.innerHTML = '<div class="list-empty">No bookmarks saved.</div>';
+      return;
+    }
+    var html = '';
+    for (var i = 0; i < list.length; i++) {
+      var title = list[i].title || list[i].url;
+      var domain = extractDomain(list[i].url);
+      html += '<div class="list-item">' +
+        '<span class="domain" title="' + escapeHtml(list[i].url) + '">' + escapeHtml(title) + '</span>' +
+        '<span class="score">' + escapeHtml(domain) + '</span>' +
+        '<button onclick="removeBookmarkItem(' + i + ')">delete</button>' +
+      '</div>';
+    }
+    bookmarksList.innerHTML = html;
+  }
+
+  window.removeBookmarkItem = function (index) {
+    getListSetting('bookmarks').then(function (list) {
+      if (list[index]) {
+        var url = list[index].url;
+        removeBookmark(url);
+      }
+    });
+  };
+
+  // === HISTORY ===
+
+  var historyList = document.getElementById('history-list');
+  var historyStatus = document.getElementById('history-status');
+
+  window.clearHistory = function () {
+    if (!confirm('Clear all browsing history? This cannot be undone.')) return;
+    setListSetting('history', []).then(function () {
+      renderHistoryList([]);
+      showStatus(historyStatus, 'History cleared.');
+    });
+  };
+
+  function renderHistoryList(list) {
+    if (!list || list.length === 0) {
+      historyList.innerHTML = '<div class="list-empty">No browsing history.</div>';
+      return;
+    }
+    // Show most recent first, limit to 100
+    var display = list.slice(-100).reverse();
+    var html = '';
+    for (var i = 0; i < display.length; i++) {
+      var title = display[i].title || display[i].url;
+      var date = display[i].date ? formatDate(display[i].date) : '';
+      html += '<div class="list-item">' +
+        '<span class="domain" title="' + escapeHtml(display[i].url) + '">' + escapeHtml(title) + '</span>' +
+        '<span class="date">' + escapeHtml(date) + '</span>' +
+      '</div>';
+    }
+    historyList.innerHTML = html;
+  }
+
+  // === LOAD ALL SETTINGS ===
+
+  function loadAll() {
+    getSetting('slop_enabled', true).then(function (val) {
+      slopEnabled.checked = val;
+    });
+    getSetting('slop_threshold', -30).then(function (val) {
+      slopThreshold.value = val;
+      slopThresholdValue.textContent = val;
+    });
+    getSetting('reader_font_size', 18).then(function (val) {
+      readerFontSize.value = val;
+    });
+    getSetting('reader_theme', 'light').then(function (val) {
+      readerTheme.value = val;
+    });
+    getListSetting('blocked_domains').then(function (list) {
+      renderBlockedList(list);
+    });
+    getListSetting('slop_overrides').then(function (list) {
+      renderOverrideList(list);
+    });
+    getListSetting('bookmarks').then(function (list) {
+      renderBookmarksList(list);
+    });
+    getListSetting('history').then(function (list) {
+      renderHistoryList(list);
+    });
+  }
+
+  loadAll();
+
+  // === NAVIGATION ===
+
+  window.goHome = function (e) {
+    if (e) e.preventDefault();
+    if (isTauri) {
+      invoke('navigate', { url: 'hole://home' }).catch(function () {});
+    } else {
+      window.location.href = 'index.html';
+    }
+  };
+
+  // === UTILITIES ===
+
+  function showStatus(el, msg) {
+    el.textContent = msg;
+    setTimeout(function () {
+      if (el.textContent === msg) el.textContent = '';
+    }, 3000);
+  }
+
+  function escapeHtml(str) {
+    if (!str) return '';
+    return str
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#39;');
+  }
+
+  function extractDomain(url) {
+    if (!url) return '';
+    try {
+      var a = document.createElement('a');
+      a.href = url;
+      return a.hostname.replace(/^www\./, '');
+    } catch (e) {
+      return '';
+    }
+  }
+
+  function formatDate(dateStr) {
+    if (!dateStr) return '';
+    var d = new Date(dateStr);
+    if (isNaN(d.getTime())) return '';
+    return d.toISOString().split('T')[0];
+  }
+
+})();
+</script>
+</body>
+</html>

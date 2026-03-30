@@ -1,0 +1,38 @@
+/* ═══ COST BREAKDOWN COMPONENT ═══ */
+
+.costs {
+  margin: 40px 0;
+}
+.costs h2 {
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 12px;
+  padding-bottom: 8px;
+  border-bottom: 2px solid #1a1a1a;
+}
+.cost-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 0;
+  border-bottom: 1px solid #eee;
+  font-size: 14px;
+}
+.cost-item:last-child {
+  border-bottom: none;
+}
+.cost-label {
+  color: #333;
+}
+.cost-amount {
+  font-weight: 700;
+  color: #1a1a1a;
+}
+.cost-total {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 0;
+  font-size: 15px;
+  font-weight: 700;
+  border-top: 2px solid #1a1a1a;
+  margin-top: 4px;
+}

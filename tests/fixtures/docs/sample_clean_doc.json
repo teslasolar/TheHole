@@ -1,0 +1,21 @@
+{
+  "url": "https://jvns.ca/blog/2024/container-networking",
+  "title": "How container networking works on Linux",
+  "author": "Julia Evans",
+  "author_id": "jvns",
+  "source": "personal_blog",
+  "source_tier": 1,
+  "date": "2025-01-10T09:00:00Z",
+  "snippet": "I spent last week figuring out how container networking actually works under the hood. It turns out it is all veth pairs and network namespaces. Here is what I learned by reading the kernel source.",
+  "body": "I spent last week figuring out how container networking actually works under the hood. It turns out it is all veth pairs and network namespaces. Here is what I learned by reading the kernel source.\n\nWhen you run a container, the runtime creates a new network namespace using the clone syscall with CLONE_NEWNET. Then it creates a veth pair: one end stays in the host namespace and the other gets moved into the container namespace.\n\nHere is how to see it:\n\n```\nip link show type veth\nip netns exec container1 ip addr\n```\n\nThe bridge device connects all the veth host ends together. Packets from the container traverse the veth pair, hit the bridge, and get routed normally from there. NAT via iptables handles outbound traffic.\n\nReferences:\n- man 7 network_namespaces\n- https://lwn.net/Articles/580893/",
+  "body_hash": "abc123def456",
+  "word_count": 145,
+  "tags": ["linux", "containers", "networking"],
+  "lang": "en",
+  "has_code": true,
+  "has_citations": true,
+  "has_data": false,
+  "outlinks": ["https://lwn.net/Articles/580893/"],
+  "author_meta": {"github_repos": 45, "github_commits": 1200, "papers": 0},
+  "inlinks": {"tier1": 2, "tier2": 5}
+}

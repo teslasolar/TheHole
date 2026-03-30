@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Understanding memory allocation in Rust</title>
+  <meta name="author" content="Alice Chen">
+  <meta name="description" content="A deep dive into stack vs heap allocation in Rust.">
+</head>
+<body>
+<article>
+  <h1>Understanding memory allocation in Rust</h1>
+  <p>Published by Alice Chen on 2025-02-01</p>
+
+  <p>Memory allocation is one of the most important concepts to understand when writing
+  systems software in Rust. Unlike garbage collected languages, Rust gives you direct
+  control over when and where memory is allocated. This post explains the difference
+  between stack and heap allocation and how the ownership system enforces safety.</p>
+
+  <h2>Stack allocation</h2>
+  <p>Local variables in Rust are allocated on the stack by default. The stack is fast
+  because allocation is just a pointer bump. When a function returns, all its stack
+  frames are freed instantly. This makes stack allocation essentially free in terms
+  of performance overhead. The compiler knows the exact size at compile time.</p>
+
+  <h2>Heap allocation</h2>
+  <p>When you need dynamic sizing or values that outlive their scope, you use the heap
+  via Box, Vec, or String. Heap allocation involves asking the allocator for memory,
+  which is slower than stack allocation. The ownership system ensures that heap memory
+  is freed exactly once when the owning variable goes out of scope.</p>
+
+  <h2>Measuring allocations</h2>
+  <p>You can use tools like valgrind and the built-in allocator API to count allocations
+  in your programs. Reducing unnecessary heap allocations is a common optimization
+  technique in performance-sensitive Rust code. Profile before optimizing to find the
+  actual bottlenecks in your allocation patterns and memory usage overhead costs.</p>
+
+  <p>References: The Rustonomicon, Rust Reference Manual section 6.2</p>
+</article>
+</body>
+</html>
