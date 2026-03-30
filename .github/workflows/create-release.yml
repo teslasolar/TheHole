@@ -7,6 +7,9 @@ on:
         description: 'Release tag (e.g. v0.1.1)'
         required: true
         default: 'v0.1.1'
+  push:
+    paths:
+      - '.release-trigger'
 
 permissions:
   contents: write
@@ -17,19 +20,33 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Determine tag
+        id: tag
+        run: |
+          if [ -n "${{ inputs.tag }}" ]; then
+            echo "tag=${{ inputs.tag }}" >> "$GITHUB_OUTPUT"
+          elif [ -f .release-trigger ]; then
+            TAG=$(cat .release-trigger | tr -d '[:space:]')
+            echo "tag=$TAG" >> "$GITHUB_OUTPUT"
+          else
+            echo "tag=v0.1.1" >> "$GITHUB_OUTPUT"
+          fi
 
       - name: Create tag
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git tag ${{ inputs.tag }}
-          git push origin ${{ inputs.tag }}
+          git tag -f ${{ steps.tag.outputs.tag }}
+          git push origin ${{ steps.tag.outputs.tag }} --force
 
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v2
         with:
-          tag_name: ${{ inputs.tag }}
-          name: "${{ inputs.tag }} — THE HOLE + BLOOM Browser"
+          tag_name: ${{ steps.tag.outputs.tag }}
+          name: "${{ steps.tag.outputs.tag }} — THE HOLE + BLOOM Browser"
           generate_release_notes: true
           draft: false
           prerelease: false
