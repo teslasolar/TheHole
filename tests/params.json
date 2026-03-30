@@ -1,0 +1,104 @@
+{
+  "clean_doc": {
+    "url": "https://jvns.ca/blog/2024/container-networking/",
+    "title": "How container networking works",
+    "author": "Julia Evans",
+    "author_id": "jvns",
+    "source": "blogs",
+    "source_tier": 2,
+    "date": "2024-10-01",
+    "body": "This post explains how container networking works under the hood. We will look at network namespaces, veth pairs, and iptables rules.",
+    "word_count": 2500,
+    "has_code": true,
+    "has_citations": true,
+    "has_data": false,
+    "tags": ["networking", "containers", "linux"]
+  },
+  "slop_doc": {
+    "url": "https://buzzdaily.com/top-10-best-vpns",
+    "title": "Top 10 Best VPNs for 2024",
+    "author": "",
+    "author_id": "",
+    "source": "web",
+    "source_tier": 4,
+    "date": "2024-01-15",
+    "body": "Sign up now for the best VPN deals! Buy now, limited time offer. Try free today! Get started with our comprehensive guide. In today's rapidly evolving landscape, let's dive deep into the best tools. Visit https://amazon.com/dp/B00?tag=aff-20 and https://shareasale.com/r/1234 and https://amzn.to/abc for amazing deals.",
+    "word_count": 300,
+    "has_code": false,
+    "has_citations": false,
+    "has_data": false,
+    "tags": ["vpn", "sponsored"]
+  },
+  "practitioner_author": {
+    "github_username": "jvns",
+    "github_repos": 80,
+    "github_commits": 400,
+    "papers": 0
+  },
+  "empty_author": {
+    "github_username": null,
+    "github_repos": 0,
+    "github_commits": 0,
+    "papers": 0
+  },
+  "academic_author": {
+    "github_username": null,
+    "github_repos": 2,
+    "github_commits": 10,
+    "papers": 45
+  },
+  "t1_inlinks": [
+    "https://arxiv.org/abs/1234",
+    "https://github.com/example/repo",
+    "https://pubmed.ncbi.nlm.nih.gov/123/"
+  ],
+  "t2_inlinks": [
+    "https://news.ycombinator.com/item?id=123",
+    "https://lobste.rs/s/abc",
+    "https://stackoverflow.com/a/456"
+  ],
+  "source_tiers": {
+    "arxiv": 1,
+    "github": 1,
+    "pubmed": 1,
+    "rfc": 1,
+    "hn": 2,
+    "so": 2,
+    "lobsters": 2,
+    "blogs": 2,
+    "fediverse": 3,
+    "web": 4
+  },
+  "slop_markers": {
+    "affiliate_urls": [
+      "https://amazon.com/dp/B00?tag=mysite-20",
+      "https://amzn.to/abc123",
+      "https://shareasale.com/r.cfm?ref=123",
+      "https://bit.ly/xyz"
+    ],
+    "llm_phrases": [
+      "dive into",
+      "delve into",
+      "it's important to note",
+      "in today's digital landscape",
+      "in this comprehensive guide",
+      "game-changer",
+      "harness the power",
+      "navigating the complexities"
+    ],
+    "cta_phrases": [
+      "sign up", "try free", "get started",
+      "buy now", "limited time", "act now"
+    ],
+    "listicle_titles": [
+      "10 Best VPNs for 2024",
+      "15 Top Tools Every Developer Needs",
+      "7 Amazing Libraries You Must Try"
+    ],
+    "clean_titles": [
+      "How container networking works",
+      "Implementing CRDTs from scratch",
+      "RFC 9110: HTTP Semantics"
+    ]
+  }
+}
