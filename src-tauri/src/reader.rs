@@ -107,3 +107,67 @@ fn collapse_whitespace(text: &str) -> String {
 pub fn get_reader_content(html: String) -> Article {
     extract_article(&html)
 }
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    fn sample_html() -> &'static str {
+        r#"<html><head><title>Test Title</title>
+        <meta name="author" content="Jane Doe">
+        </head><body>
+        <nav>Menu items</nav>
+        <script>var x = 1;</script>
+        <article><p>Hello world. This is the article body with enough words to count.</p></article>
+        </body></html>"#
+    }
+
+    #[test]
+    fn test_extracts_title() {
+        let a = extract_article(sample_html());
+        assert_eq!(a.title, "Test Title");
+    }
+
+    #[test]
+    fn test_extracts_article_content() {
+        let a = extract_article(sample_html());
+        assert!(a.content.contains("Hello world"));
+        assert!(a.content.contains("article body"));
+    }
+
+    #[test]
+    fn test_strips_script_nav() {
+        let a = extract_article(sample_html());
+        assert!(!a.content.contains("var x"));
+        assert!(!a.content.contains("Menu items"));
+    }
+
+    #[test]
+    fn test_extracts_meta_author() {
+        let a = extract_article(sample_html());
+        assert_eq!(a.author, "Jane Doe");
+    }
+
+    #[test]
+    fn test_missing_author_empty() {
+        let html = "<html><head><title>No Author</title></head><body><p>Text</p></body></html>";
+        let a = extract_article(html);
+        assert_eq!(a.author, "");
+    }
+
+    #[test]
+    fn test_word_count() {
+        let html = "<html><body><article>one two three four five</article></body></html>";
+        let a = extract_article(html);
+        assert_eq!(a.word_count, 5);
+    }
+
+    #[test]
+    fn test_reading_time() {
+        // 230 words should be 1 minute
+        let words: String = (0..230).map(|i| format!("word{}", i)).collect::<Vec<_>>().join(" ");
+        let html = format!("<html><body><article>{}</article></body></html>", words);
+        let a = extract_article(&html);
+        assert_eq!(a.reading_time, 1);
+    }
+}

@@ -121,14 +121,47 @@ mod tests {
     }
 
     #[test]
-    fn test_url_detection() {
+    fn test_empty_is_home() {
+        assert!(matches!(parse_input(""), RouterAction::HoleHome));
+        assert!(matches!(parse_input("   "), RouterAction::HoleHome));
+        assert!(matches!(parse_input("hole://home"), RouterAction::HoleHome));
+    }
+
+    #[test]
+    fn test_https_url_navigate() {
         match parse_input("https://example.com") {
             RouterAction::Navigate(u) => assert_eq!(u, "https://example.com"),
             other => panic!("expected Navigate, got {:?}", other),
         }
+    }
+
+    #[test]
+    fn test_bare_domain_navigate() {
         match parse_input("example.com") {
             RouterAction::Navigate(u) => assert_eq!(u, "https://example.com"),
             other => panic!("expected Navigate, got {:?}", other),
+        }
+    }
+
+    #[test]
+    fn test_gh_shortcut() {
+        match parse_input(":gh tauri") {
+            RouterAction::SourceShortcut { source, query } => {
+                assert_eq!(source, "github");
+                assert_eq!(query, "tauri");
+            }
+            other => panic!("expected SourceShortcut, got {:?}", other),
+        }
+    }
+
+    #[test]
+    fn test_arxiv_shortcut() {
+        match parse_input(":arxiv transformers") {
+            RouterAction::SourceShortcut { source, query } => {
+                assert_eq!(source, "arxiv");
+                assert_eq!(query, "transformers");
+            }
+            other => panic!("expected SourceShortcut, got {:?}", other),
         }
     }
 
@@ -141,13 +174,25 @@ mod tests {
     }
 
     #[test]
-    fn test_source_shortcuts() {
-        match parse_input(":gh tauri") {
-            RouterAction::SourceShortcut { source, query } => {
-                assert_eq!(source, "github");
-                assert_eq!(query, "tauri");
-            }
-            other => panic!("expected SourceShortcut, got {:?}", other),
-        }
+    fn test_bang_empty_is_home() {
+        assert!(matches!(parse_input("!"), RouterAction::HoleHome));
+        assert!(matches!(parse_input("!  "), RouterAction::HoleHome));
+    }
+
+    #[test]
+    fn test_settings_url() {
+        assert!(matches!(parse_input("hole://settings"), RouterAction::HoleSettings));
+    }
+
+    #[test]
+    fn test_build_shortcut_url_github() {
+        let url = build_shortcut_url("github", "hello world").unwrap();
+        assert!(url.starts_with("https://github.com/search?q="));
+        assert!(url.contains("hello"));
+    }
+
+    #[test]
+    fn test_build_shortcut_url_unknown() {
+        assert!(build_shortcut_url("unknown_source", "q").is_none());
     }
 }

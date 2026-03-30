@@ -180,3 +180,96 @@ pub fn get_slop_report(
 ) -> PageReport {
     shield.analyze_page(&html, &url)
 }
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    fn shield() -> SlopShield {
+        SlopShield::new()
+    }
+
+    #[test]
+    fn test_clean_html_no_trackers() {
+        let s = shield();
+        let scripts = s.find_blocked_scripts("<html><body>Hello</body></html>");
+        assert!(scripts.is_empty());
+    }
+
+    #[test]
+    fn test_detects_ga_tracker() {
+        let s = shield();
+        let html = r#"<script src="https://www.google-analytics.com/analytics.js"></script>"#;
+        let scripts = s.find_blocked_scripts(html);
+        assert!(!scripts.is_empty());
+    }
+
+    #[test]
+    fn test_affiliate_amazon_tag() {
+        let s = shield();
+        let html = r#"<a href="https://amazon.com/dp/B00?tag=mysite-20">buy</a>"#;
+        assert!(s.count_affiliates(html) >= 1);
+    }
+
+    #[test]
+    fn test_no_affiliates_zero() {
+        let s = shield();
+        assert_eq!(s.count_affiliates("<p>clean page</p>"), 0);
+    }
+
+    #[test]
+    fn test_llm_marker_detection() {
+        let s = shield();
+        let html = "As an AI language model, let's dive deep into this comprehensive guide.";
+        assert!(s.count_llm_markers(html) >= 2);
+    }
+
+    #[test]
+    fn test_clean_text_no_markers() {
+        let s = shield();
+        assert_eq!(s.count_llm_markers("Rust is a systems programming language."), 0);
+    }
+
+    #[test]
+    fn test_slop_score_clean_zero() {
+        let s = shield();
+        let score = s.compute_slop(&[], 0, 0);
+        assert!((score - 0.0).abs() < f64::EPSILON);
+    }
+
+    #[test]
+    fn test_slop_score_high() {
+        let s = shield();
+        let scripts = vec!["a".into(), "b".into(), "c".into(), "d".into(), "e".into()];
+        let score = s.compute_slop(&scripts, 5, 3);
+        assert!(score >= 0.7);
+    }
+
+    #[test]
+    fn test_analyze_clean_page_none_action() {
+        let s = shield();
+        let report = s.analyze_page("<html><body>Hello world</body></html>", "https://clean.com");
+        assert!(matches!(report.action, SlopAction::None));
+    }
+
+    #[test]
+    fn test_analyze_slop_page_warn() {
+        let s = shield();
+        let html = r#"
+            <script src="https://www.google-analytics.com/a.js"></script>
+            <script src="https://www.googletagmanager.com/b.js"></script>
+            <script src="https://www.doubleclick.net/c.js"></script>
+            <script src="https://www.googlesyndication.com/d.js"></script>
+            <script src="https://connect.facebook.net/e.js"></script>
+            <a href="https://amzn.to/abc">link</a>
+            <a href="https://amzn.to/def">link</a>
+            <a href="https://amzn.to/ghi">link</a>
+            <a href="https://shareasale.com/r">link</a>
+            <a href="https://clickbank.net/x">link</a>
+            As an AI language model, this comprehensive guide will delve into
+        "#;
+        let report = s.analyze_page(html, "https://slop.example.com");
+        assert!(report.slop_score >= 0.7);
+        assert!(matches!(report.action, SlopAction::WarnBanner(_)));
+    }
+}

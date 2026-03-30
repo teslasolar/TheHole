@@ -202,3 +202,110 @@ pub fn set_setting(key: String, value: String, db: tauri::State<'_, Database>) -
     .map_err(|e| e.to_string())?;
     Ok(())
 }
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    fn test_db() -> Database {
+        let conn = Connection::open_in_memory().unwrap();
+        let db = Database { conn: Mutex::new(conn) };
+        db.init_tables().unwrap();
+        db
+    }
+
+    #[test]
+    fn test_init_tables() {
+        let db = test_db();
+        let conn = db.conn.lock().unwrap();
+        // Verify all four tables exist by querying sqlite_master
+        let count: i64 = conn
+            .query_row(
+                "SELECT COUNT(*) FROM sqlite_master WHERE type='table' AND name IN ('bookmarks','history','slop_overrides','settings')",
+                [],
+                |r| r.get(0),
+            )
+            .unwrap();
+        assert_eq!(count, 4);
+    }
+
+    #[test]
+    fn test_bookmark_add_list() {
+        let db = test_db();
+        {
+            let conn = db.conn.lock().unwrap();
+            conn.execute("INSERT INTO bookmarks (url, title, tags) VALUES (?1, ?2, ?3)", params!["https://a.com", "A", "tag1"]).unwrap();
+            conn.execute("INSERT INTO bookmarks (url, title, tags) VALUES (?1, ?2, ?3)", params!["https://b.com", "B", ""]).unwrap();
+        }
+        let conn = db.conn.lock().unwrap();
+        let count: i64 = conn.query_row("SELECT COUNT(*) FROM bookmarks", [], |r| r.get(0)).unwrap();
+        assert_eq!(count, 2);
+    }
+
+    #[test]
+    fn test_bookmark_remove() {
+        let db = test_db();
+        let id: i64;
+        {
+            let conn = db.conn.lock().unwrap();
+            conn.execute("INSERT INTO bookmarks (url, title) VALUES (?1, ?2)", params!["https://x.com", "X"]).unwrap();
+            id = conn.last_insert_rowid();
+        }
+        {
+            let conn = db.conn.lock().unwrap();
+            conn.execute("DELETE FROM bookmarks WHERE id = ?1", params![id]).unwrap();
+        }
+        let conn = db.conn.lock().unwrap();
+        let count: i64 = conn.query_row("SELECT COUNT(*) FROM bookmarks", [], |r| r.get(0)).unwrap();
+        assert_eq!(count, 0);
+    }
+
+    #[test]
+    fn test_history_add_list_clear() {
+        let db = test_db();
+        {
+            let conn = db.conn.lock().unwrap();
+            conn.execute("INSERT INTO history (url, title) VALUES (?1, ?2)", params!["https://h.com", "H"]).unwrap();
+        }
+        {
+            let conn = db.conn.lock().unwrap();
+            let count: i64 = conn.query_row("SELECT COUNT(*) FROM history", [], |r| r.get(0)).unwrap();
+            assert_eq!(count, 1);
+        }
+        {
+            let conn = db.conn.lock().unwrap();
+            conn.execute("DELETE FROM history", []).unwrap();
+        }
+        let conn = db.conn.lock().unwrap();
+        let count: i64 = conn.query_row("SELECT COUNT(*) FROM history", [], |r| r.get(0)).unwrap();
+        assert_eq!(count, 0);
+    }
+
+    #[test]
+    fn test_settings_set_get_upsert() {
+        let db = test_db();
+        {
+            let conn = db.conn.lock().unwrap();
+            conn.execute(
+                "INSERT INTO settings (key, value) VALUES (?1, ?2) ON CONFLICT(key) DO UPDATE SET value = excluded.value",
+                params!["theme", "dark"],
+            ).unwrap();
+        }
+        {
+            let conn = db.conn.lock().unwrap();
+            let val: String = conn.query_row("SELECT value FROM settings WHERE key = ?1", params!["theme"], |r| r.get(0)).unwrap();
+            assert_eq!(val, "dark");
+        }
+        // upsert
+        {
+            let conn = db.conn.lock().unwrap();
+            conn.execute(
+                "INSERT INTO settings (key, value) VALUES (?1, ?2) ON CONFLICT(key) DO UPDATE SET value = excluded.value",
+                params!["theme", "light"],
+            ).unwrap();
+        }
+        let conn = db.conn.lock().unwrap();
+        let val: String = conn.query_row("SELECT value FROM settings WHERE key = ?1", params!["theme"], |r| r.get(0)).unwrap();
+        assert_eq!(val, "light");
+    }
+}
