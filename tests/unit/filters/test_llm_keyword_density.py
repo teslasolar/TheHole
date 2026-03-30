@@ -9,7 +9,7 @@ def test_empty_returns_zero():
 
 
 def test_normal_text_low_density():
-    text = "The server handles requests from clients using TCP connections over the network stack."
+    text = "The server handles requests from clients using TCP connections over the network stack while balancing load across multiple backend instances running different services behind a reverse proxy layer."
     density = max_keyword_density(text)
     assert density < 0.05
 

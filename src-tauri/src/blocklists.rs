@@ -99,11 +99,52 @@ mod tests {
     use super::*;
 
     #[test]
-    fn test_load_default() {
+    fn test_load_default_has_entries() {
         let bl = BlockList::load_default();
         assert!(bl.len() > 50, "bundled list should have 50+ domains");
+        assert!(!bl.is_empty());
+    }
+
+    #[test]
+    fn test_known_domains_blocked() {
+        let bl = BlockList::load_default();
         assert!(bl.is_blocked("https://doubleclick.net/ad.js"));
         assert!(bl.is_blocked("https://sub.google-analytics.com/collect"));
+    }
+
+    #[test]
+    fn test_easylist_format_parsed() {
+        let bl = BlockList::parse_list("||tracker.example.com^\n||ads.test.org^\n");
+        assert_eq!(bl.len(), 2);
+        assert!(bl.is_blocked("https://tracker.example.com/pixel"));
+        assert!(bl.is_blocked("https://ads.test.org/banner"));
+    }
+
+    #[test]
+    fn test_plain_domain_parsed() {
+        let bl = BlockList::parse_list("badsite.com\nevil.org\n");
+        assert_eq!(bl.len(), 2);
+        assert!(bl.is_blocked("https://badsite.com/page"));
+    }
+
+    #[test]
+    fn test_comments_skipped() {
+        let bl = BlockList::parse_list("! this is a comment\n[Adblock Plus]\n||real.com^\n");
+        assert_eq!(bl.len(), 1);
+        assert!(bl.is_blocked("https://real.com/x"));
+    }
+
+    #[test]
+    fn test_subdomain_match() {
+        let bl = BlockList::parse_list("||tracker.com^\n");
+        assert!(bl.is_blocked("https://sub.tracker.com/path"));
+        assert!(bl.is_blocked("https://deep.sub.tracker.com/path"));
+    }
+
+    #[test]
+    fn test_not_blocked() {
+        let bl = BlockList::load_default();
         assert!(!bl.is_blocked("https://example.com"));
+        assert!(!bl.is_blocked("https://rust-lang.org"));
     }
 }
